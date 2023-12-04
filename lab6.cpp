@@ -130,6 +130,15 @@ public:
          }
 	    words = page;
 	    category = A_cat;
+
+
+
+	// magic number 5 is to erase [X]\n.
+	    words.erase(0,words.find("[" + category + "]") + 5);
+	    size_t new_length = words.size();
+	//2 is to erase \n.
+	    size_t erase_from = words.find("[") - 2;
+	    words.erase(erase_from, new_length - erase_from);
     }
 
     void getRandomWord(){
