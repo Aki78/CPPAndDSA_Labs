@@ -126,7 +126,7 @@ public:
 	    string page,line;
         while (getline (inputFile, line)) {
 		page.append(line);
-		line.erase();
+//		line.erase();
          }
 	    words = page;
 	    category = A_cat;
@@ -134,11 +134,13 @@ public:
 
 
 	// magic number 5 is to erase [X]\n.
-	    words.erase(0,words.find("[" + category + "]") + 5);
+//	    words.erase(0,words.find("[" + category + "]") + 5);
 	    size_t new_length = words.size();
 	//2 is to erase \n.
 	    size_t erase_from = words.find("[") - 2;
-	    words.erase(erase_from, new_length - erase_from);
+//	    words.erase(erase_from, new_length - erase_from - 1);
+
+	    cout<< words << endl;
     }
 
     void getRandomWord(){
@@ -170,13 +172,14 @@ public:
 string giveStatement(string filename) {
 WordPool g, a, s, v;
 ifstream inputFile(filename);
-//g.fill("G", inputFile); a.fill("A", inputFile); s.fill("S", inputFile); v.fill("V", inputFile);
+g.fill("G", inputFile);// a.fill("A", inputFile); s.fill("S", inputFile); //v.fill("V", inputFile);
 //return g + a + s + v + g + a + s;
 return "";
 }
 //------------------------------------
 
 int main(){
+// Task A
     
     MyString s;
     
@@ -184,7 +187,10 @@ int main(){
     s = "Matti"; //Conversion c-string -> String
     cout << s;
     strcpy(name, s); //Conversion String -> c-string
-    cout << name;
+    cout << name << endl;
+
+
+// Task B
 
     string page, line, location, temperature;
     ifstream inputFile("weather.xml");
@@ -199,6 +205,9 @@ int main(){
 
     cout << "Location: " << location << endl;
     cout << "Temperature: " << temperature << endl;
+
+// Task Extra
+	giveStatement("oracle.dat");
 
     return 0;
 }
