@@ -114,39 +114,41 @@ string find_field(const string& myXML, const string& myTag) {
 
 class WordPool {
 private:
-    string* words;
+    string words;
     string category;
     size_t size;
 
 public:
-    WordPool():size(0){}
+    WordPool():size(0), words(""){}
+    string final_word;
 
     void fill(const string& A_cat, ifstream& inputFile){
-        string line;
-	category = A_cat;
-        bool categoryFound = false;
-        while (getline(inputFile, line)){
-            if (line == "[" + category + "]"){
-                categoryFound = true;
-                continue;
-            }
-            if (categoryFound){
-                if (line.empty() || line[0] == '[') break;
-                words[size++] = line;
-            }
-        }
     }
 
-    string getRandomWord() const{
+    void getRandomWord() const{
 	srand(time(nullptr));
         int n = rand();
         size_t index = n % size;
-        return words[index];
+//        final_word = words[index];
+        final_word = words;
     }
 
-     WordPool operator+(const WordPool& other) const {
-            return getRandomWord() + " " + other.getRandomWord();
-        }
+//    WordPool& operator=(const WordPool& other) {
+//        if (this != &other) {
+//            delete words;
+////            c_string = new string ;
+//            strcpy(c_string, other.c_string);
+//        }
+//        return *this;
+//    }
+
+//     WordPool operator+(const WordPool& other) const {
+//	    getRandomWord();
+//	    other.getRandomWord();
+//	    WordPool plussedObject();
+//
+//            return ;
+//        }
 };
 
 //-----------------------------------------
@@ -154,7 +156,7 @@ string giveStatement(string filename) {
 WordPool g, a, s, v;
 ifstream inputFile(filename);
 //g.fill("G", inputFile); a.fill("A", inputFile); s.fill("S", inputFile); v.fill("V", inputFile);
-return g + a + s + v + g + a + s;
+//return g + a + s + v + g + a + s;
 }
 //------------------------------------
 
@@ -181,8 +183,6 @@ int main(){
 
     cout << "Location: " << location << endl;
     cout << "Temperature: " << temperature << endl;
-
-
 
     return 0;
 }
