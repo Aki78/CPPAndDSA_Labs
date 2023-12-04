@@ -119,18 +119,24 @@ private:
     size_t size;
 
 public:
-    WordPool():size(0), words(""){}
-    string final_word;
+    WordPool():size(0){}
+    string rand_word;
 
     void fill(const string& A_cat, ifstream& inputFile){
+	    string page,line;
+        while (getline (inputFile, line)) {
+		page.append(line);
+		line.erase();
+         }
+	    words = page;
+	    category = A_cat;
     }
 
-    void getRandomWord() const{
+    void getRandomWord(){
 	srand(time(nullptr));
         int n = rand();
         size_t index = n % size;
-//        final_word = words[index];
-        final_word = words;
+        rand_word = words;
     }
 
 //    WordPool& operator=(const WordPool& other) {
@@ -157,6 +163,7 @@ WordPool g, a, s, v;
 ifstream inputFile(filename);
 //g.fill("G", inputFile); a.fill("A", inputFile); s.fill("S", inputFile); v.fill("V", inputFile);
 //return g + a + s + v + g + a + s;
+return "";
 }
 //------------------------------------
 
