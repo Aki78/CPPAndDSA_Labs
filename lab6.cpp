@@ -1,17 +1,9 @@
-/******************************************************************************
-
-Welcome to GDB Online.
-  GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
-  C#, OCaml, VB, Perl, Swift, Prolog, Javascript, Pascal, COBOL, HTML, CSS, JS
-  Code, Compile, Run and Debug online from anywhere in world.
-
-*******************************************************************************/
-#define _CRT_RAND_S
 #include <stdio.h>
 #include<iostream>
 #include<string.h>
 #include <fstream>
 #include <string>
+#define _CRT_RAND_S
 #include <stdlib.h>
 
 using namespace std;
@@ -145,15 +137,27 @@ public:
         }
     }
 
-    string getRandomWord(){
+    string getRandomWord() const{
 	srand(time(nullptr));
         int n = rand();
         size_t index = n % size;
         return words[index];
     }
+
+     WordPool operator+(const WordPool& other) const {
+            return getRandomWord() + " " + other.getRandomWord();
+        }
 };
 
 //-----------------------------------------
+string giveStatement(string filename) {
+WordPool g, a, s, v;
+ifstream inputFile(filename);
+//g.fill("G", inputFile); a.fill("A", inputFile); s.fill("S", inputFile); v.fill("V", inputFile);
+return g + a + s + v + g + a + s;
+}
+//------------------------------------
+
 int main(){
     
     MyString s;
