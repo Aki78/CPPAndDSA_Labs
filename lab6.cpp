@@ -124,7 +124,6 @@ string getNthLine(const string& str, size_t n) {
     size_t lineNum = 0;
     size_t startPos = 0;
 
-//    cout << "N is: " << n << endl;
 
     for (size_t i = 0; i < str.length(); ++i) {
         if (str[i] == '\n') {
@@ -158,7 +157,6 @@ private:
 
 public:
     WordPool(){}
-//    string rand_word;
     string summed_words;
 
     void fill(const string& A_cat, ifstream& inputFile){
@@ -172,9 +170,9 @@ public:
 	    inputFile.clear();
 	    inputFile.seekg(0, ios::beg); 
 
+
 	    words = page;
 	    category = A_cat;
-
 
 
 	// magic number 5 is to erase [X]\n.
@@ -183,20 +181,14 @@ public:
 	//2 is to erase \n.
         size_t erase_from = words.find("[");
 	if (erase_from != string::npos) words.erase(erase_from, new_length - erase_from);
-	//cout << words << endl;
                 
     }
 
     void setRandomWord(){
-//	cout << "word list is: " << word_list << endl; 
         size_t size =  countNewLines(words);
         int n = rand();
-//	cout << "WORDS ARE" << words << endl;
-//	cout << "size is: " << size << endl; 
         size_t index = n % size;
         rand_word = getNthLine(words, index);
-//	cout << "words are: " << words << endl;
-//	cout << "rand word is: " << rand_word << endl;
     }
 
     WordPool& operator=(const WordPool& other) {
@@ -210,35 +202,24 @@ public:
 
 	    setRandomWord();
 
-	    //summed_words = other.rand_word + other.summed_words;
-	    cout << "RAND WORD IS: " << rand_word << endl;
 
-
-//	    setRandomWord();
-//	    cout << "summed words are: " << summed_words <<endl ;
-
-//	    other.summed_words = summed_words + " " + category + " ";
-	    other.summed_words = summed_words + " " + rand_word + " ";
+	    other.summed_words = summed_words + " " + rand_word;
 	    size_t pos; 
-
+// Dirty file bug that took me half a day and gdb to solve lol lol lol
 	        while ((pos = other.summed_words.find('\r')) != string::npos) {
         other.summed_words.erase(pos, 1);
     }
 
 	    WordPool newObject = other;
-//	    newObject.words = words;
-//	    cout <<  newObject.summed_words <<endl ;
-	    cout << "summed words are BAAAAAAAAAAAAAAAAAAAAAAA " << newObject.summed_words <<endl ;
-	    cout << endl;
 	    
 
             return newObject;
         }
 
 
-    operator const string() const {
-//	    cout << "THE FINALLLL SUMMED WORDS ARE:   " << summed_words << endl;
-        return summed_words;
+    operator const string(){
+        setRandomWord();
+        return summed_words + " " + rand_word;
     }
 };
 
@@ -247,7 +228,7 @@ string giveStatement(string filename) {
 WordPool g, a, s, v;
 ifstream inputFile(filename);
 g.fill("G", inputFile); a.fill("A", inputFile); s.fill("S", inputFile); v.fill("V", inputFile);
-return g + a + a + g + a + a + s + v + g + a + s + s + s + s + v;
+return g + a + s + v + g + a + s;
 }
 //------------------------------------
 
