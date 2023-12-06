@@ -4,6 +4,7 @@
 extern int modify_array(int* array, int size);
 
 int main() {
+
     int size = 200;
     int* array = malloc(size * sizeof(int));
     for(int i=0; i<size; i++){
