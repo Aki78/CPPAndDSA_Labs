@@ -263,8 +263,7 @@ int main(){
 
 // Task Extra
 
-	cout << "statement is: " << endl;
-	cout << giveStatement("oracle.dat") << endl;
+	cout << "statement is: "  << giveStatement("oracle.dat") << endl;
 
 
     return 0;
