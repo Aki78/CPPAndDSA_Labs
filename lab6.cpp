@@ -124,9 +124,9 @@ public:
 
     void fill(const string& A_cat, ifstream& inputFile){
 	    string page,line;
-        while (getline (inputFile, line)) {
-		page.append(line);
-//		line.erase();
+        while(getline (inputFile, line)) {
+		page += line + '\n';
+		line.erase();
          }
 	    words = page;
 	    category = A_cat;
@@ -134,13 +134,14 @@ public:
 
 
 	// magic number 5 is to erase [X]\n.
-//	    words.erase(0,words.find("[" + category + "]") + 5);
+	    words.erase(0,words.find("[" + category + "]") + 5);
 	    size_t new_length = words.size();
 	//2 is to erase \n.
-	    size_t erase_from = words.find("[") - 2;
-//	    words.erase(erase_from, new_length - erase_from - 1);
-
-	    cout<< words << endl;
+        size_t erase_from = words.find("[");
+	cout << erase_from << endl;
+	if (erase_from != string::npos) words.erase(erase_from, new_length - erase_from - 2);
+                
+	    cout<< words;
     }
 
     void getRandomWord(){
@@ -150,14 +151,27 @@ public:
         rand_word = words;
     }
 
-//    WordPool& operator=(const WordPool& other) {
+    WordPool& operator=(const WordPool& other) {
+        if (this != &other) {
+	    words = other.words; 
+	    category = other.category; 
+	    size = other.size; 
+	    rand_word = other.rand_word; 
+
+        }
+        return *this;
+    }
+
+
+//    MyString& operator=(const MyString& other) {
 //        if (this != &other) {
-//            delete words;
-////            c_string = new string ;
+//            delete[] c_string;
+//            c_string = new char[strlen(other.c_string) + 1];
 //            strcpy(c_string, other.c_string);
 //        }
 //        return *this;
 //    }
+
 
 //     WordPool operator+(const WordPool& other) const {
 //	    getRandomWord();
@@ -172,7 +186,7 @@ public:
 string giveStatement(string filename) {
 WordPool g, a, s, v;
 ifstream inputFile(filename);
-g.fill("G", inputFile);// a.fill("A", inputFile); s.fill("S", inputFile); //v.fill("V", inputFile);
+g.fill("V", inputFile);// a.fill("A", inputFile); s.fill("S", inputFile); //v.fill("V", inputFile);
 //return g + a + s + v + g + a + s;
 return "";
 }
