@@ -211,18 +211,24 @@ public:
 	    setRandomWord();
 
 	    //summed_words = other.rand_word + other.summed_words;
-	    cout << "RAND WORD IS: " << other.rand_word << endl;
+	    cout << "RAND WORD IS: " << rand_word << endl;
 
 
 //	    setRandomWord();
-	    cout << "summed words are: " << summed_words <<endl ;
+//	    cout << "summed words are: " << summed_words <<endl ;
 
-//	    other.summed_words = "  " + other.category + " " + summed_words;// other.rand_word + other.summed_words;
-	    other.summed_words =  rand_word + summed_words;
+//	    other.summed_words = summed_words + " " + category + " ";
+	    other.summed_words = summed_words + " " + rand_word + " ";
+	    size_t pos; 
+
+	        while ((pos = other.summed_words.find('\r')) != string::npos) {
+        other.summed_words.erase(pos, 1);
+    }
+
 	    WordPool newObject = other;
 //	    newObject.words = words;
 //	    cout <<  newObject.summed_words <<endl ;
-	    cout << "summed words are AAAAAAAAAAAAAAAAAAAAAAAA : " << newObject.summed_words <<endl ;
+	    cout << "summed words are BAAAAAAAAAAAAAAAAAAAAAAA " << newObject.summed_words <<endl ;
 	    cout << endl;
 	    
 
@@ -231,6 +237,7 @@ public:
 
 
     operator const string() const {
+//	    cout << "THE FINALLLL SUMMED WORDS ARE:   " << summed_words << endl;
         return summed_words;
     }
 };
