@@ -28,7 +28,6 @@ public:
     
     ~MyString() {
         delete[] c_string;
-        cout << "Destroyed!\n";
     }
 
     MyString operator+(const MyString& other) const {
@@ -109,6 +108,45 @@ string find_field(const string& myXML, const string& myTag) {
 
 
 //--Part Extra--------------------------------
+//Helper Functions
+//---------------------------------------
+size_t countNewLines(const string& str) {
+    size_t count = 0;
+    for (char ch : str) {
+        if (ch == '\n') {
+            ++count;
+        }
+    }
+    return count;
+}
+
+string getNthLine(const string& str, size_t n) {
+    size_t lineNum = 0;
+    size_t startPos = 0;
+
+//    cout << "N is: " << n << endl;
+
+    for (size_t i = 0; i < str.length(); ++i) {
+        if (str[i] == '\n') {
+            lineNum++;
+            if (lineNum == n) {
+                size_t endPos = i - startPos;
+                return str.substr(startPos, endPos);
+            }
+            startPos = i + 1;
+        }
+    }
+
+    // Checking if the line is the last line without a newline at the end
+    if (lineNum == n - 1) {
+        return str.substr(startPos);
+    }
+
+    // If nth line does not exist, return an empty string
+    return "";
+}
+
+//--Part Extra--------------------------------
 //Class Def
 //---------------------------------------
 
@@ -116,18 +154,24 @@ class WordPool {
 private:
     string words;
     string category;
-    size_t size;
+    string rand_word;
 
 public:
-    WordPool():size(0){}
-    string rand_word;
+    WordPool(){}
+//    string rand_word;
+    string summed_words;
 
     void fill(const string& A_cat, ifstream& inputFile){
 	    string page,line;
+
+
         while(getline (inputFile, line)) {
 		page += line + '\n';
 		line.erase();
          }
+	    inputFile.clear(); // Clear any error flags
+	    inputFile.seekg(0, std::ios::beg); // Seek back to the beginning
+
 	    words = page;
 	    category = A_cat;
 
@@ -138,57 +182,66 @@ public:
 	    size_t new_length = words.size();
 	//2 is to erase \n.
         size_t erase_from = words.find("[");
-	cout << erase_from << endl;
-	if (erase_from != string::npos) words.erase(erase_from, new_length - erase_from - 2);
+	if (erase_from != string::npos) words.erase(erase_from, new_length - erase_from);
+	//cout << words << endl;
                 
-	    cout<< words;
     }
 
-    void getRandomWord(){
+    void setRandomWord(){
 	srand(time(nullptr));
+//	cout << "word list is: " << word_list << endl; 
+        size_t size =  countNewLines(words);
         int n = rand();
+//	cout << "WORDS ARE" << words << endl;
+//	cout << "size is: " << size << endl; 
         size_t index = n % size;
-        rand_word = words;
+        rand_word = getNthLine(words, index);
+//	cout << "words are: " << words << endl;
+//	cout << "rand word is: " << rand_word << endl;
     }
 
     WordPool& operator=(const WordPool& other) {
         if (this != &other) {
 	    words = other.words; 
 	    category = other.category; 
-	    size = other.size; 
-	    rand_word = other.rand_word; 
+	    summed_words = other.summed_words;
+	    rand_word = other.rand_word;
 
         }
         return *this;
     }
 
 
-//    MyString& operator=(const MyString& other) {
-//        if (this != &other) {
-//            delete[] c_string;
-//            c_string = new char[strlen(other.c_string) + 1];
-//            strcpy(c_string, other.c_string);
-//        }
-//        return *this;
-//    }
+     WordPool operator+(WordPool& other) {
+
+	    WordPool newObject;
+
+//	    cout << "word1" << word1 <<endl ;
+//	    cout << "word2" << word2 <<endl ;
+	    setRandomWord();
+	    other.setRandomWord();
+//	    cout << "RAND WORD OS" << rand_word << endl;
+	    newObject.summed_words = summed_words + " " + rand_word + " " + other.rand_word;
+//	    newObject.words = words;
+//	    cout <<  newObject.summed_words <<endl ;
+	    cout << "summed words are: " << newObject.summed_words <<endl ;
+	    
+
+            return newObject;
+        }
 
 
-//     WordPool operator+(const WordPool& other) const {
-//	    getRandomWord();
-//	    other.getRandomWord();
-//	    WordPool plussedObject();
-//
-//            return ;
-//        }
+    operator const string() const {
+        return summed_words;
+    }
 };
 
 //-----------------------------------------
 string giveStatement(string filename) {
 WordPool g, a, s, v;
 ifstream inputFile(filename);
-g.fill("V", inputFile);// a.fill("A", inputFile); s.fill("S", inputFile); //v.fill("V", inputFile);
-//return g + a + s + v + g + a + s;
-return "";
+g.fill("G", inputFile); a.fill("A", inputFile); s.fill("S", inputFile); v.fill("V", inputFile);
+return g + a + s + v + g + a + s;
 }
 //------------------------------------
 
@@ -221,7 +274,11 @@ int main(){
     cout << "Temperature: " << temperature << endl;
 
 // Task Extra
-	giveStatement("oracle.dat");
+	cout << "statement is: " << endl;
+	cout << giveStatement("oracle.dat") << endl;
+	cout << "end of statment. " << endl;
+
+	cout << "program terminated..." << endl;
 
     return 0;
 }
