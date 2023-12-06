@@ -169,8 +169,8 @@ public:
 		page += line + '\n';
 		line.erase();
          }
-	    inputFile.clear(); // Clear any error flags
-	    inputFile.seekg(0, std::ios::beg); // Seek back to the beginning
+	    inputFile.clear();
+	    inputFile.seekg(0, ios::beg); 
 
 	    words = page;
 	    category = A_cat;
@@ -201,11 +201,6 @@ public:
 
     WordPool& operator=(const WordPool& other) {
        if (this != &other) {
-	    words = other.words; 
-	    category = other.category; 
-	    summed_words = other.summed_words;
-	    rand_word = other.rand_word;
-
         }
         return *this;
     }
@@ -213,16 +208,21 @@ public:
 
      WordPool operator+(WordPool& other) {
 
-	    WordPool newObject = *this;
 	    other.setRandomWord();
 
-	    summed_words += other.rand_word +  " "  + other.summed_words;
-	    cout << "RAND WORD OS" << other.rand_word << endl;
-	    newObject.summed_words = summed_words ;
+	    //summed_words = other.rand_word + other.summed_words;
+	    cout << "RAND WORD IS: " << other.rand_word << endl;
+
+
+	    setRandomWord();
+
+	    WordPool newObject = *this;
+	    newObject.summed_words = rand_word +  other.rand_word + other.summed_words;;
 //	    newObject.words = words;
 //	    cout <<  newObject.summed_words <<endl ;
 	    cout << "summed words are: " << endl;
 	    cout << "summed words are: " << newObject.summed_words <<endl ;
+	    cout << endl;
 	    
 
             return newObject;
