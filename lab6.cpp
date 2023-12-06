@@ -262,11 +262,10 @@ int main(){
     cout << "Temperature: " << temperature << endl;
 
 // Task Extra
+
 	cout << "statement is: " << endl;
 	cout << giveStatement("oracle.dat") << endl;
-	cout << "end of statment. " << endl;
 
-	cout << "program terminated..." << endl;
 
     return 0;
 }
