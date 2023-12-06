@@ -208,20 +208,21 @@ public:
 
      WordPool operator+(WordPool& other) {
 
-	    other.setRandomWord();
+	    setRandomWord();
 
 	    //summed_words = other.rand_word + other.summed_words;
 	    cout << "RAND WORD IS: " << other.rand_word << endl;
 
 
-	    setRandomWord();
+//	    setRandomWord();
+	    cout << "summed words are: " << summed_words <<endl ;
 
-	    WordPool newObject = *this;
-	    newObject.summed_words = rand_word +  other.rand_word + other.summed_words;;
+//	    other.summed_words = "  " + other.category + " " + summed_words;// other.rand_word + other.summed_words;
+	    other.summed_words =  rand_word + summed_words;
+	    WordPool newObject = other;
 //	    newObject.words = words;
 //	    cout <<  newObject.summed_words <<endl ;
-	    cout << "summed words are: " << endl;
-	    cout << "summed words are: " << newObject.summed_words <<endl ;
+	    cout << "summed words are AAAAAAAAAAAAAAAAAAAAAAAA : " << newObject.summed_words <<endl ;
 	    cout << endl;
 	    
 
@@ -239,7 +240,7 @@ string giveStatement(string filename) {
 WordPool g, a, s, v;
 ifstream inputFile(filename);
 g.fill("G", inputFile); a.fill("A", inputFile); s.fill("S", inputFile); v.fill("V", inputFile);
-return g + a + s + v + g + a + s;
+return g + a + a + g + a + a + s + v + g + a + s + s + s + s + v;
 }
 //------------------------------------
 
