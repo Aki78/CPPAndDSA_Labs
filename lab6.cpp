@@ -220,11 +220,12 @@ public:
 //	    cout << "word2" << word2 <<endl ;
 	    setRandomWord();
 	    other.setRandomWord();
+	    summed_words += other.rand_word +  " "  + other.summed_words;
 //	    cout << "RAND WORD OS" << rand_word << endl;
-	    newObject.summed_words = summed_words + " " + rand_word + " " + other.rand_word;
+	    newObject.summed_words = rand_word + " " + summed_words;
 //	    newObject.words = words;
 //	    cout <<  newObject.summed_words <<endl ;
-	    cout << "summed words are: " << newObject.summed_words <<endl ;
+//	    cout << "summed words are: " << newObject.summed_words <<endl ;
 	    
 
             return newObject;
