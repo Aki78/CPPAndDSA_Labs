@@ -200,16 +200,16 @@ public:
 //	cout << "rand word is: " << rand_word << endl;
     }
 
-    WordPool& operator=(const WordPool& other) {
-        if (this != &other) {
-	    words = other.words; 
-	    category = other.category; 
-	    summed_words = other.summed_words;
-	    rand_word = other.rand_word;
-
-        }
-        return *this;
-    }
+ //   WordPool& operator=(const WordPool& other) {
+ //       if (this != &other) {
+//	    words = other.words; 
+//	    category = other.category; 
+//	    summed_words = other.summed_words;
+//	    rand_word = other.rand_word;
+//
+//        }
+//        return *this;
+//    }
 
 
      WordPool operator+(WordPool& other) {
@@ -218,14 +218,14 @@ public:
 
 //	    cout << "word1" << word1 <<endl ;
 //	    cout << "word2" << word2 <<endl ;
-	    setRandomWord();
+//	    setRandomWord();
 	    other.setRandomWord();
 	    summed_words += other.rand_word +  " "  + other.summed_words;
 //	    cout << "RAND WORD OS" << rand_word << endl;
-	    newObject.summed_words = rand_word + " " + summed_words;
+	    newObject.summed_words = summed_words ;
 //	    newObject.words = words;
 //	    cout <<  newObject.summed_words <<endl ;
-//	    cout << "summed words are: " << newObject.summed_words <<endl ;
+	    cout << "summed words are: " << newObject.summed_words <<endl ;
 	    
 
             return newObject;
