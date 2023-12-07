@@ -1,21 +1,38 @@
-.global factorial
+    .global factorial
 
+    // Function: factorial
+    // Argument: w0 (32-bit integer)
+    // Returns: w0 (32-bit integer)
 factorial:
-    stp x29, x30, [sp, #-16]!  // Push x29 (Frame Pointer) and x30 (Link Register) to the stack
-    mov x29, sp                // Set x29 to current stack pointer
+    // Save LR and FP (Link Register and Frame Pointer)
+    stp x29, x30, [sp, #-16]!
+    mov x29, sp
 
-    cmp x0, #1                 // Compare x0 with 1
-    bgt else                   // If greater, branch to 'else' label
+    // Base case: if the input is less than 2, return 1
+    cmp w0, #2
+    b.lt end_factorial
 
-    mov x0, #1                 // Set x0 to 1 for factorial of 0 or 1
-    ldp x29, x30, [sp], #16    // Pop x29 and x30 from the stack
-    ret                        // Return
+    // Prepare for recursive call: decrement the input
+    sub w0, w0, #1
 
-else:
-    sub x0, x0, #1             // Subtract 1 from x0
-    bl factorial               // Recursive call to factorial
+    // Recursive call
+    bl factorial
 
-    ldp x1, x30, [sp], #16     // Pop x1 (previous x0) and x30 (Link Register) from the stack
-    mul x0, x1, x0             // Multiply x0 by x1 (previous x0)
-    ret                        // Return
+    // Restore the original input value (now in w1)
+    add w1, w0, #1
+
+    // Multiply the result of the recursive call with the original input value
+    mul w0, w0, w1
+
+    // Restore FP and LR, and return
+    ldp x29, x30, [sp], #16
+    ret
+
+end_factorial:
+    // For base case, return 1
+    mov w0, #1
+
+    // Restore FP and LR, and return
+    ldp x29, x30, [sp], #16
+    ret
 
