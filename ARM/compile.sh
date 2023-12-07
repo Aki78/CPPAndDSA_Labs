@@ -1,3 +1,3 @@
-as -o modify_array.o list_for_loop.asm
-gcc -g -o myprogram main.c modify_array.o
+as -o to_upper.o to_upper.asm
+gcc -g to_upper_main.c to_upper.o
 rm *.o
