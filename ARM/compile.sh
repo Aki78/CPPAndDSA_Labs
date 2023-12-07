@@ -1,3 +1,3 @@
-as -o to_upper.o to_upper.asm
-gcc -g to_upper_main.c to_upper.o
+as -o factorial.o factorial.asm
+gcc -g factorial_main.c factorial.o
 rm *.o
