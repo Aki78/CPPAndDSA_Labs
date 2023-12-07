@@ -1,23 +1,27 @@
 .global to_upper
 
 to_upper:
-    // x0 = chars
+    // x0 = pointer to chars
 
-    mov x1, #0  // Initialize sum register
+    mov x1, #0  // Initialize index register
 
 loop:
-    cmp x1, x0  // Compare counter with size
-    bge end_loop
+    ldrb w2 , [x0, x1]  // Load byte from [x0 + x1] into w2 
+    cmp w2 , #0         // Check if the byte is null terminator
+    beq end_loop       // If it is null terminator, exit loop
 
-    ldrb w0, [x0, x1]  // load char to reg
-    add x2, x2, #32   // Add 10 to the value
-    strb w0, [x0, x1]  // Store the value back in the array then shift 4
+    cmp w2 , #97        // Check if the character is 'a' or higher
+    blt skip           // If lower, skip conversion
+    cmp w2 , #122       // Check if the character is 'z' or lower
+    bgt skip           // If higher, skip conversion
 
-    add x1, x1, #1    // Add the value to the sum
-    B loop
+    sub w2 , w2 , #32    // Convert to uppercase by subtracting 32
+    strb w2 , [x0, x1]  // Store the updated character back
+
+skip:
+    add x1, x1, #1    // Increment the index
+    b loop            // Repeat the loop
 
 end_loop:
     ret
-
-//as -o to_upper.o to_upper.ams
 
