@@ -4,35 +4,15 @@
     // Argument: w0 (32-bit integer)
     // Returns: w0 (32-bit integer)
 factorial:
-    // Save LR and FP (Link Register and Frame Pointer)
-    stp x29, x30, [sp, #-16]!
-    mov x29, sp
-
-    // Base case: if the input is less than 2, return 1
-    cmp w0, #2
-    b.lt end_factorial
-
-    // Prepare for recursive call: decrement the input
-    sub w0, w0, #1
-
-    // Recursive call
-    bl factorial
-
-    // Restore the original input value (now in w1)
-    add w1, w0, #1
-
-    // Multiply the result of the recursive call with the original input value
-    mul w0, w0, w1
-
-    // Restore FP and LR, and return
-    ldp x29, x30, [sp], #16
-    ret
-
-end_factorial:
-    // For base case, return 1
-    mov w0, #1
-
-    // Restore FP and LR, and return
-    ldp x29, x30, [sp], #16
-    ret
-
+	push {r0, lr} 
+	cmp r0, #1 
+	bgt else 
+	mov r0, #1 
+	add sp, sp, #8 
+	mov pc, lr 
+else:
+        sub r0, r0, #1 
+	blt factorial 
+	pop {r1, lr} 
+	mul r0, r1, r0 
+	mov pc, lr 
