@@ -10,11 +10,7 @@ Counter& Counter::operator++() {
    count++;
    return *this;
 }
-Counter Counter::operator++(int) {
-   Counter old = *this;;
-   count++;
-   return old;
-}
+
 void Counter::reset(){
    count = 0;
 }

@@ -6,9 +6,9 @@ using namespace std;
 class Counter {
     friend ostream &operator<<(ostream &out, const Counter &c);
     public:
+	virtual Counter& increment() = 0;
         Counter(int n0 = 0);
         Counter &operator++();
-        Counter operator++(int);
         bool operator<(const Counter &c2) const;
         void reset();
 	int getCount() const;

@@ -1,8 +1,4 @@
     .global factorial
-
-    // Function: factorial
-    // Argument: w0 (32-bit integer)
-    // Returns: w0 (32-bit integer)
 factorial:
 	push {r0, lr} 
 	cmp r0, #1 
