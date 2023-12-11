@@ -5,7 +5,7 @@ extern int factorial(int n);
 
 int main() {
 
-    int n = factorial(3);
+    int n = factorial(5);
 
 	printf("the chars are: %i\n", n);
 

@@ -4,7 +4,7 @@ factorial:
 	cmp r0, #1 
 	bgt else 
 	mov r0, #1 
-	add sp, sp, #8 
+	add sp, sp, #8  // to ignore (undo) the last push because we got the return 1
 	mov pc, lr 
 else:
         sub r0, r0, #1 
