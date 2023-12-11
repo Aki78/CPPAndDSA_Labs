@@ -1,3 +1,3 @@
-as -o factorial.o factorial.asm
-gcc -g factorial_main.c factorial.o
+as -o $1.o $1.asm
+gcc -g $1_main.c $1.o
 rm *.o

@@ -1,4 +1,4 @@
-    .global factorial
+	.global factorial
 factorial:
 	push {r0, lr} 
 	cmp r0, #1 
@@ -8,7 +8,7 @@ factorial:
 	mov pc, lr 
 else:
         sub r0, r0, #1 
-	blt factorial 
+	bl factorial 
 	pop {r1, lr} 
 	mul r0, r1, r0 
 	mov pc, lr 
