@@ -1,5 +1,5 @@
 	.global factorial
-factorial:
+factorial: 
 	push {r0, lr} 
 	cmp r0, #1 
 	bgt else 
