@@ -14,9 +14,8 @@ private:
 	int count;
 	T   array[MAX];
 	void compress(T *array, int empty_slot, int n) {
-		int i;
 
-		for (i = empty_slot + 1; i < n; i++)
+		for (int i = empty_slot + 1; i < n; i++)
 			array[i - 1] = array[i];
 	}
 
@@ -50,6 +49,23 @@ public:
 			return false;
 	}
 
+	bool insert(T item) {
+		if (count < MAX) {
+			for (int i = 0; i < count+1; i++){
+				if (array[i] < item) {
+cout << " HIT " << endl;
+						array[i] = item;
+						return true;
+					}
+				}
+
+				array[count++] = item;
+				return true;
+			}
+		else
+			return false;
+		}
+
 	bool find_pos(T item, int *pos) {
 		int i;
 
@@ -67,7 +83,7 @@ public:
 		if (orderNo >= 0 && orderNo < count) {
 			//take item out means nothing
 			compress(array, orderNo, count);
-			count--; 	// or should this be inside compress
+			--count; 	// or should this be inside compress
 			return true;
 		}
 		else
@@ -76,12 +92,6 @@ public:
 
 
 };
-
-
-
-
-
-
 
 
 class Time {
@@ -156,8 +166,8 @@ class Time {
 	}
 	
 	bool lessThan(const Time& time2) const {
-		if (time2.hour != hour) return time2.hour < hour;
-		else  time2.minute < minute;
+		if (time2.hour != hour) return time2.get_hour() < hour;
+		else return  time2.get_minute() < minute;
 	}
 	
 	Time operator-( Time& time2) {
@@ -210,13 +220,14 @@ istream& operator>>(istream& is, Time& time2) {
 int main () {
 	 List<Time> list;
 	 Time item;
-	 int i = 0;
+	int i;
 
 	 cout << "Enter items?\n";
 	 cin >> item;
 	 while (!(item == Time(0, 0))) {
 		 //list.insert_to_end(item);
-		 list.insert_to_end(item);
+//		 list.insert_to_end(item);
+		 list.insert(item);
 		 cin >> item;
 	 }
 	 //Print the contents of the list
