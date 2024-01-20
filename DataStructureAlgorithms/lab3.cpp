@@ -9,6 +9,15 @@ class Time {
 		int minute;
 	public:
 		string temp_string;
+
+	Time(int h, int m){
+		hour = h;
+		minute = m;
+
+	} 
+	Time(): hour(0), minute(0){
+
+	} 
 		
 	void read(string print_me){
 		cout << print_me << ": ";
@@ -81,7 +90,7 @@ class Time {
 	bool operator<(Time& time2){
 		return lessThan(time2);
 	}
-	bool operator==(Time& time2){
+	bool operator==(const Time& time2) const {
 		return (hour == time2.hour) && (minute == time2.minute);
 	}
 	
@@ -113,23 +122,7 @@ istream& operator>>(istream& is, Time& time2) {
 	return is;
 }
 
-class RaceTime : public Time {
-	
-}
 
-istream& operator>>(istream& is, RaceTime& time2) {
-	string temp_string;
-	size_t colonPos;
-
-	is >> temp_string;
-	colonPos = temp_string.find(' ');
-	string hour_string = temp_string.substr(0, colonPos);
-	string minute_string = temp_string.substr(colonPos + 1);
-	time2.set_hour(stoi(hour_string));
-	time2.set_minute(stoi(minute_string));
-
-	return is;
-}
 
 
 //Application
