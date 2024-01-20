@@ -53,7 +53,10 @@ public:
 		if (count < MAX) {
 			for (int i = 0; i < count+1; i++){
 				if (array[i] < item) {
-cout << " HIT " << endl;
+					for (int j = i; j < count+1; j++){
+						array[j+1] = array[j];
+					}
+						++count;
 						array[i] = item;
 						return true;
 					}
@@ -225,7 +228,6 @@ int main () {
 	 cout << "Enter items?\n";
 	 cin >> item;
 	 while (!(item == Time(0, 0))) {
-		 //list.insert_to_end(item);
 //		 list.insert_to_end(item);
 		 list.insert(item);
 		 cin >> item;
