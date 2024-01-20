@@ -1,8 +1,89 @@
 #include <iostream>
 #include <string>
-#include "list.h"
+#include <stdexcept>
+
+
+#define  MAX 10
 
 using namespace std;
+
+template <class T>
+class List {
+
+private:
+	int count;
+	T   array[MAX];
+	void compress(T *array, int empty_slot, int n) {
+		int i;
+
+		for (i = empty_slot + 1; i < n; i++)
+			array[i - 1] = array[i];
+	}
+
+public:
+
+	List() {
+		count = 0;
+	}
+
+	bool empty() {
+		return count == 0;
+	}
+
+	int size() {
+		return count;
+	}
+
+	const T &operator[](int i) const {
+		if (count > 0 && i <= count)
+			return array[i - 1];
+		else
+			throw range_error("Index error");
+	}
+
+	bool insert_to_end(T item) {
+		if (count < MAX) {
+			array[count++] = item;
+			return true;
+		}
+		else
+			return false;
+	}
+
+	bool find_pos(T item, int *pos) {
+		int i;
+
+		for (i = 0; i < count; i++) {
+			if (array[i] == item) {
+				*pos = i;
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	bool del(int orderNo) {
+		if (orderNo >= 0 && orderNo < count) {
+			//take item out means nothing
+			compress(array, orderNo, count);
+			count--; 	// or should this be inside compress
+			return true;
+		}
+		else
+			return false;
+	}
+
+
+};
+
+
+
+
+
+
+
+
 class Time {
 	private:
 		int hour;
