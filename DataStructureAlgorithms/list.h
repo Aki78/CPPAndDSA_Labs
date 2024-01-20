@@ -2,9 +2,11 @@
 
 #define  MAX 10
 
+using namespace std;
 //Interface of the list
 template <class T>
 class List {
+
 private:
 	int count;
 	T   array[MAX];
@@ -40,8 +42,8 @@ template <class T>
 const T &List<T>::operator[](int i) const {
 	if (count > 0 && i <= count)
 		return array[i - 1];
-//	else
-//		throw range_error("Index error");
+	else
+		throw range_error("Index error");
 }
 
 template <class T>

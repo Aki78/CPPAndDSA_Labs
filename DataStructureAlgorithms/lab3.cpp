@@ -128,10 +128,10 @@ istream& operator>>(istream& is, Time& time2) {
 //Application
 int main () {
 	 List<Time> list;
-	 Time	   item;
-	 int		i = 0;
+	 Time item;
+	 int i = 0;
 
-	 cout << "Enter items? ";
+	 cout << "Enter items?\n";
 	 cin >> item;
 	 while (!(item == Time(0, 0))) {
 		 //list.insert_to_end(item);
@@ -140,21 +140,21 @@ int main () {
 	 }
 	 //Print the contents of the list
 	 for (i = 1; i <= list.size(); i++)
-		 cout << "\n " << i << "th item was " << list[i];
+		 cout << "\n " << i << "th item was \n" << list[i];
 	 cout << "\nDelete list items ?";
 	 cin >> item;
 	 while (!(item == Time(0, 0))) {
-		 if(list.find_pos(item, &i)) {
-			 cout << "\nThe position of the item in list is " << i;
-			 list.del(i);
+		if(list.find_pos(item, &i)) {
+			cout << "\nThe position of the item in list is \n" << i;
+			list.del(i);
 		 } else
-			 cout << "\nItem not found";
-			 cin >> item;
+			cout << "\nItem not found";
+			cin >> item;
 		 }
 	 //Print the contents of the list
 	 for (i = 1; i <= list.size(); i++)
-		 cout << "\n " << i << "th item was " << list[i];
-	 cout << endl;
+		cout << "\n " << i << "th item was " << list[i];
+	cout << endl;
 
 	 return 0;
 }
