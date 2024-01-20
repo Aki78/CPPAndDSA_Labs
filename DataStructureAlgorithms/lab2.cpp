@@ -7,10 +7,10 @@ using namespace std;
 
 class Measurements {
 	private:
-	int data_length;
 	double* data;
 
 	public:
+	int data_length;
 	
 	int read(const char *fname){
 
@@ -18,7 +18,7 @@ class Measurements {
 		ifstream file(filename);
 
 		if (!file.is_open()) {
-			cerr << "Could not open the file - '" << filename << "'" << endl;
+			cerr << "Can't open file - '" << filename << "'" << endl;
 			return 0;
 		}
 
@@ -40,7 +40,6 @@ class Measurements {
 	}
 
 		file.close();
-	cout << "closing file";
 
 
 	return 1;
@@ -48,7 +47,6 @@ class Measurements {
 	}
 	
 	void print(){
-	cout << "starting printing";
 		for (int i = 0; i < data_length; ++i) {
 			cout << data[i] << " ";
 		}
@@ -64,8 +62,6 @@ class Measurements {
 		for (int i = 0; i < data_length; ++i) {
 			accum += data[i];
 		}
-		cout << "total: " << accum << endl;
-		cout << "size: " << data_length << endl;
 		return accum;
 	}
 
@@ -76,23 +72,41 @@ class Measurements {
 	}
 
 
-	Measurement& operator=(Masurement & other){
+	Measurements& operator=(const Measurements& other){
 
+
+		if (this == &other) {
+			return *this;
+		}
+
+		data_length = 100;
+//  Why doesn't this work? it just crashes.
+// 		if (data != nullptr) {
+//			delete data;
+//		}
+
+		data = new double[data_length];
+		for (int i = 0; i < data_length; ++i) {
+			data[i] = other.data[i];
+		}
+
+		return *this;
 	}
+
+    ~Measurements() { 
+        delete[] data; 
+    }
 };
 
 
 int main(int argc, char *argv[]) {
 	Measurements m1, m2;
 	if (m1.read("mea.dat")) {
-cout << "printing now: " << endl;
 		m1.print();
 		m2 = m1;
 		m2.inc(0.1);
 		cout << "Mean m1 is " << m1.mean() << endl;
 		cout << "Mean m2 is " << m2.mean() << endl;
 	}
-	else
-		cout << "Can't open the file '" << filename << "'" << endl;
 	return 0;
 }
