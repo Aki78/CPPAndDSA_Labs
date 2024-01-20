@@ -35,7 +35,7 @@ class Measurements {
 	for(int i = 0; i < data_length; ++i) {
 		if(!(iss >> data[i])) {
 			cerr << "Error reading number at position " << i << endl;
-			delete[] data;
+			delete data;
 		}
 	}
 
@@ -94,7 +94,7 @@ class Measurements {
 	}
 
     ~Measurements() { 
-        delete[] data; 
+        delete data; 
     }
 };
 
