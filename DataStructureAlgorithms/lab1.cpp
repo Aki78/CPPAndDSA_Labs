@@ -4,6 +4,8 @@
 
 using namespace std;
 
+#define MAX_RACE_TIMES 10
+
 class Time {
 	private:
 		int hour;
@@ -93,10 +95,9 @@ ostream& operator<<(std::ostream& os, const Time& my_time) {
 	os << ":";
 	if (my_time.get_minute() < 10 ) os << "0" << abs(my_time.get_minute());
 	else os << abs(my_time.get_minute());
-	os << endl;
+//	os << endl;
 	return os;
 }
-
 istream& operator>>(istream& is, Time& time2) {
 	string temp_string;
 	size_t colonPos;
@@ -111,22 +112,74 @@ istream& operator>>(istream& is, Time& time2) {
 	return is;
 }
 
+
 class RaceTime : public Time {
 	
+	
+
+	friend ostream& operator<<(ostream& os, const RaceTime& my_time);
+	friend istream& operator>>(istream& is, const RaceTime& my_time);
+};
+
+
+ostream& operator<<(std::ostream& os, const RaceTime& my_time) {
+	if (my_time.get_hour() < 10) os << "0" << abs(my_time.get_hour());
+	else os << abs(my_time.get_hour());
+	os << ":";
+	if (my_time.get_minute() < 10 ) os << "0" << abs(my_time.get_minute());
+	else os << abs(my_time.get_minute());
+	return os;
 }
 
 istream& operator>>(istream& is, RaceTime& time2) {
 	string temp_string;
 	size_t colonPos;
+	int hour, minute;
 
-	is >> temp_string;
-	colonPos = temp_string.find(' ');
-	string hour_string = temp_string.substr(0, colonPos);
-	string minute_string = temp_string.substr(colonPos + 1);
-	time2.set_hour(stoi(hour_string));
-	time2.set_minute(stoi(minute_string));
+	cout << "Give the time 1 (hh mm)?  ";
+//	is >> temp_string;
+	is >> hour >> minute;
+//	temp_string.erase(0, temp_string.find_first_not_of(" \n\r\t\f\v"));
+//	temp_string.erase(temp_string.find_last_not_of(" \n\r\t\f\v") + 1);
+//	colonPos = temp_string.find('\f');
+
+//	string hour_string = temp_string.substr(0, colonPos);
+//	string minute_string = temp_string.substr(colonPos + 1);
+
+//	time2.set_hour(stoi(hour_string));
+//	time2.set_minute(stoi(minute_string));
+
+
+	time2.set_hour(hour);
+	time2.set_minute(minute);
 
 	return is;
+}
+
+
+int startRace(RaceTime* my_times){
+	string size_string;
+	int size;
+
+	cout << "How many times you have? ";
+	cin >> size_string;
+	size = stoi(size_string);
+	cout << size << endl;
+
+	for(int i = 0; i < size; i++){
+		cin >> my_times[i];
+	}
+	return size;
+}
+
+void printRaces(RaceTime* my_times, int size){
+	cout << "Result list:" << endl;
+
+	cout << " " << 1 << ": " << my_times[0] << " 00:00" << endl;
+
+	for(int i = 1; i < size; i++){
+		cout << " " << i+1 << ": " << my_times[i] <<  " " << my_times[i] - my_times[i-1] << endl;
+	}
 }
 
 int main(){
@@ -154,15 +207,20 @@ int main(){
 //	cout << "Duration was ";
 //	duration.display();
 //	
-	// Exercie 1B 
+	// Exercize 1B 
 	
-	Time start, end, duration;
-	cout << "Enter starting time "; cin >> start;
-	cout << "Enter ending time "; cin >> end;
-	duration = start < end ? end - start : start - end;
-	cout << "Duration " << duration << endl;
-	cout << "Starting time was " << end - duration << endl;
-	cout << "Ending time was " << start + duration << endl;
+//	Time start, end, duration;
+//	cout << "Enter starting time "; cin >> start;
+//	cout << "Enter ending time "; cin >> end;
+//	duration = start < end ? end - start : start - end;
+//	cout << "Duration " << duration << endl;
+//	cout << "Starting time was " << end - duration << endl;
+//	cout << "Ending time was " << start + duration << endl;
+
+	// Exercize 1C
+	RaceTime raceTimeList[MAX_RACE_TIMES];
+	int size = startRace(raceTimeList);
+	printRaces(raceTimeList, size);
 
 
 	return 0;
