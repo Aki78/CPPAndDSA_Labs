@@ -49,6 +49,17 @@ public:
 			return false;
 	}
 
+
+	bool insert_to_begin(T item) {
+		if (count < MAX) {
+			array[0] = item;
+			count++;
+			return true;
+		}
+		else
+			return false;
+	}
+
 	bool insert(T item) {
 		if (count < MAX) {
 			for (int i = 0; i < count+1; i++){
