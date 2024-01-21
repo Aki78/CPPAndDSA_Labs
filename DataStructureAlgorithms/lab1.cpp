@@ -132,23 +132,10 @@ ostream& operator<<(std::ostream& os, const RaceTime& my_time) {
 }
 
 istream& operator>>(istream& is, RaceTime& time2) {
-	string temp_string;
-	size_t colonPos;
 	int hour, minute;
 
 	cout << "Give the time 1 (hh mm)?  ";
-//	is >> temp_string;
 	is >> hour >> minute;
-//	temp_string.erase(0, temp_string.find_first_not_of(" \n\r\t\f\v"));
-//	temp_string.erase(temp_string.find_last_not_of(" \n\r\t\f\v") + 1);
-//	colonPos = temp_string.find('\f');
-
-//	string hour_string = temp_string.substr(0, colonPos);
-//	string minute_string = temp_string.substr(colonPos + 1);
-
-//	time2.set_hour(stoi(hour_string));
-//	time2.set_minute(stoi(minute_string));
-
 
 	time2.set_hour(hour);
 	time2.set_minute(minute);
