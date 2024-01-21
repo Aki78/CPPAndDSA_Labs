@@ -52,8 +52,9 @@ public:
 
 	bool insert_to_begin(T item) {
 		if (count < MAX) {
-			array[0] = item;
 			count++;
+			array[count] = array[count - 1];
+			array[0] = item;
 			return true;
 		}
 		else
