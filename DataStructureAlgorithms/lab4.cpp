@@ -2,6 +2,8 @@
 #include <string>
 #include <stdexcept>
 
+using namespace std;
+
 //Interface for ADT stack
 #define MAXN 10
 
@@ -45,7 +47,6 @@ public:
 		cout << endl;
 	}
 
-
 };
 
 
@@ -55,101 +56,42 @@ using namespace std;
 class RPN {
 	private:
 	public:
-	RPN(int h, int m){
-		hour = h;
-		minute = m;
-
-	} 
-	RPN(): hour(0), minute(0){
-
-	} 
+	RPN(): hour(0), minute(0){} 
 	
-	void set_hour(int new_hour){
-		hour = new_hour;
-	}
 	
-	void set_minute(int new_minute){
-		minute = new_minute;
-	}
-	int get_hour() const {
-		return hour;
-	}
+	RPN subtract( RPN& other) {return *this}
+	RPN add( RPN& other) {return *this}
 	
-	int get_minute() const {
-		return minute;
-	}
+	void display(){}
 	
-	RPN subtract( RPN& time2) {
-		RPN temp;
-		int hour_didff = hour - time2.get_hour();
-		int min_didff = minute - time2.get_minute();
-		temp.set_hour(hour_didff);
-		temp.set_minute(min_didff);
-		return temp;
-	}
-	RPN add( RPN& time2) {
-		RPN temp;
-		int hour_didff = hour + time2.get_hour();
-		int min_didff = minute + time2.get_minute();
-		temp.set_hour(hour_didff);
-		temp.set_minute(min_didff);
-		return temp;
-	}
+	bool lessThan(const RPN& other) const {return true}
 	
-	void display(){
-		if (hour < 10) cout << "0" << abs(hour);
-		else cout << abs(hour);
-		cout << ":";
-		if (minute < 10 ) cout << "0" << abs(minute);
-		else cout << abs(minute);
-		cout << endl;
-	}
-	
-	bool lessThan(const RPN& time2) const {
-		if (time2.hour != hour) return time2.get_hour() < hour;
-		else return  time2.get_minute() < minute;
-	}
-	
-	RPN operator-( RPN& time2) {
-		return subtract(time2);
+	RPN operator-( RPN& other) {
+		return subtract(other);
 	}
 
-	RPN operator+( RPN& time2) {
-		return add(time2);
+	RPN operator+( RPN& other) {
+		return add(other);
 	}
 	
-	bool operator<(RPN& time2){
-		return lessThan(time2);
+	bool operator<(RPN& other){
+		return lessThan(other);
 	}
-	bool operator==(const RPN& time2) const {
-		return (hour == time2.hour) && (minute == time2.minute);
-	}
+	bool operator==(const RPN& other) const {return true;}
 	
 	friend ostream& operator<<(ostream& os, const RPN& my_time);
 	friend istream& operator>>(istream& is, const RPN& my_time);
 };
 
 ostream& operator<<(std::ostream& os, const RPN& my_time) {
-	if (my_time.get_hour() < 10) os << "0" << abs(my_time.get_hour());
-	else os << abs(my_time.get_hour());
-	os << ":";
-	if (my_time.get_minute() < 10 ) os << "0" << abs(my_time.get_minute());
-	else os << abs(my_time.get_minute());
-	os << endl;
+
+	os << "HEllo World" << endl;
 	return os;
 }
 
-istream& operator>>(istream& is, RPN& time2) {
+istream& operator>>(istream& is, RPN& other) {
 	string temp_string;
-	size_t colonPos;
-
 	is >> temp_string;
-	colonPos = temp_string.find(':');
-	string hour_string = temp_string.substr(0, colonPos);
-	string minute_string = temp_string.substr(colonPos + 1);
-	time2.set_hour(stoi(hour_string));
-	time2.set_minute(stoi(minute_string));
-
 	return is;
 }
 

@@ -2,8 +2,10 @@
 #include <string>
 #include <stdexcept>
 
+using namespace std;
+
 //Interface for ADT stack
-#define MAXN 5
+#define MAXN 10
 
 template <class T>
 class Stack {
@@ -13,11 +15,11 @@ private:
 public:
 
 // Implementations of operation functions
-	Stack<T>::Stack() {
+	Stack() {
 		top = -1;
 	}
 
-	bool Stack<T>::push(T item) {
+	bool push(T item) {
 		if (top >= MAXN - 1)
 		return(false);
 		else {
@@ -26,7 +28,7 @@ public:
 		}
 	}
 
-	bool Stack<T>::pop(T &item) {
+	bool pop(T &item) {
 		if (top == - 1)
 		return(false);
 		else {
@@ -35,7 +37,7 @@ public:
 		}
 	}
 
-	void Stack<T>::print() {
+	void print() {
 		int i;
 
 		cout << "\nStack is : ";
@@ -45,122 +47,51 @@ public:
 		cout << endl;
 	}
 
-
 };
 
 
 
 using namespace std;
 
-class Time {
+class RPN {
 	private:
 	public:
-	Time(int h, int m){
-		hour = h;
-		minute = m;
-
-	} 
-	Time(): hour(0), minute(0){
-
-	} 
-		
-	void read(string print_me){
-		cout << print_me << ": ";
-		cin >> temp_string;
-		size_t colonPos = temp_string.find(':');
-		string hour_string = temp_string.substr(0, colonPos);
-		string minute_string = temp_string.substr(colonPos + 1);
-		hour = stoi(hour_string);
-		minute = stoi(minute_string);
-		
-	}
+	RPN(): hour(0), minute(0){} 
 	
-	void set_hour(int new_hour){
-		hour = new_hour;
-	}
 	
-	void set_minute(int new_minute){
-		minute = new_minute;
-	}
-	int get_hour() const {
-		return hour;
-	}
+	RPN subtract( RPN& other) {return *this}
+	RPN add( RPN& other) {return *this}
 	
-	int get_minute() const {
-		return minute;
-	}
+	void display(){}
 	
-	Time subtract( Time& time2) {
-		Time temp;
-		int hour_didff = hour - time2.get_hour();
-		int min_didff = minute - time2.get_minute();
-		temp.set_hour(hour_didff);
-		temp.set_minute(min_didff);
-		return temp;
-	}
-	Time add( Time& time2) {
-		Time temp;
-		int hour_didff = hour + time2.get_hour();
-		int min_didff = minute + time2.get_minute();
-		temp.set_hour(hour_didff);
-		temp.set_minute(min_didff);
-		return temp;
-	}
+	bool lessThan(const RPN& other) const {return true}
 	
-	void display(){
-		if (hour < 10) cout << "0" << abs(hour);
-		else cout << abs(hour);
-		cout << ":";
-		if (minute < 10 ) cout << "0" << abs(minute);
-		else cout << abs(minute);
-		cout << endl;
-	}
-	
-	bool lessThan(const Time& time2) const {
-		if (time2.hour != hour) return time2.get_hour() < hour;
-		else return  time2.get_minute() < minute;
-	}
-	
-	Time operator-( Time& time2) {
-		return subtract(time2);
+	RPN operator-( RPN& other) {
+		return subtract(other);
 	}
 
-	Time operator+( Time& time2) {
-		return add(time2);
+	RPN operator+( RPN& other) {
+		return add(other);
 	}
 	
-	bool operator<(Time& time2){
-		return lessThan(time2);
+	bool operator<(RPN& other){
+		return lessThan(other);
 	}
-	bool operator==(const Time& time2) const {
-		return (hour == time2.hour) && (minute == time2.minute);
-	}
+	bool operator==(const RPN& other) const {return true;}
 	
-	friend ostream& operator<<(ostream& os, const Time& my_time);
-	friend istream& operator>>(istream& is, const Time& my_time);
+	friend ostream& operator<<(ostream& os, const RPN& my_time);
+	friend istream& operator>>(istream& is, const RPN& my_time);
 };
 
-ostream& operator<<(std::ostream& os, const Time& my_time) {
-	if (my_time.get_hour() < 10) os << "0" << abs(my_time.get_hour());
-	else os << abs(my_time.get_hour());
-	os << ":";
-	if (my_time.get_minute() < 10 ) os << "0" << abs(my_time.get_minute());
-	else os << abs(my_time.get_minute());
-	os << endl;
+ostream& operator<<(std::ostream& os, const RPN& my_time) {
+
+	os << "HEllo World" << endl;
 	return os;
 }
 
-istream& operator>>(istream& is, Time& time2) {
+istream& operator>>(istream& is, RPN& other) {
 	string temp_string;
-	size_t colonPos;
-
 	is >> temp_string;
-	colonPos = temp_string.find(':');
-	string hour_string = temp_string.substr(0, colonPos);
-	string minute_string = temp_string.substr(colonPos + 1);
-	time2.set_hour(stoi(hour_string));
-	time2.set_minute(stoi(minute_string));
-
 	return is;
 }
 
@@ -168,6 +99,6 @@ istream& operator>>(istream& is, Time& time2) {
 
 //Application
 int main () {
-	 Time item;
+	 RPN item;
 	 return 0;
 }
