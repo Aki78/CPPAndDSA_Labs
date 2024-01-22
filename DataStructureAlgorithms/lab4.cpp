@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <cctype>
+#include <sstream>
 #include <stdexcept>
 
 using namespace std;
@@ -56,15 +58,15 @@ using namespace std;
 class RPN {
 	private:
 	public:
-	RPN(): hour(0), minute(0){} 
+	RPN() {} 
 	
 	
-	RPN subtract( RPN& other) {return *this}
-	RPN add( RPN& other) {return *this}
+	RPN subtract( RPN& other) {return *this;}
+	RPN add( RPN& other) {return *this;}
 	
 	void display(){}
 	
-	bool lessThan(const RPN& other) const {return true}
+	bool lessThan(const RPN& other) const {return true;}
 	
 	RPN operator-( RPN& other) {
 		return subtract(other);
@@ -83,7 +85,7 @@ class RPN {
 	friend istream& operator>>(istream& is, const RPN& my_time);
 };
 
-ostream& operator<<(std::ostream& os, const RPN& my_time) {
+ostream& operator<<(ostream& os, const RPN& my_time) {
 
 	os << "HEllo World" << endl;
 	return os;
@@ -96,9 +98,40 @@ istream& operator>>(istream& is, RPN& other) {
 }
 
 
+bool isValidInput(const string& input) {
+	// Check if input is a number
+	stringstream ss(input);
+	double num;
+	if (ss >> num && ss.eof()) {
+		return true; // It's a valid number
+	}
 
-//Application
-int main () {
-	 RPN item;
-	 return 0;
+	// Check if input is one of the specified operators
+	if (input == "+" || input == "-" || input == "=") {
+		return true; // It's a valid operator
+	}
+
+	// Input is neither a number nor a valid operator
+	return false;
+}
+
+int main() {
+	string input;
+
+	while (true) {
+		cout << "Enter a number or an operator (+, -, =), or type 'exit' to quit: ";
+		getline(cin, input);
+
+		if (input == "exit") {
+			break; // Exit the loop if the user types 'exit'
+		}
+
+		if (isValidInput(input)) {
+			cout << "Correct" << endl;
+		} else {
+			cout << "Incorrect" << endl;
+		}
+	}
+
+	return 0;
 }
