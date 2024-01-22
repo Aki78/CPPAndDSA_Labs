@@ -112,7 +112,6 @@ bool getInputType(const string& input) {
 	}
 
 	if (input == "+" || input == "-" || input == "=") {
-	cout << "OPE IS HAPPENIONG" <<  input << endl;
 		return OPE;
 	}
 
@@ -120,13 +119,19 @@ bool getInputType(const string& input) {
 }
 
 bool add(Stack<string>& stack){
-	cout << "adding" << endl;
 
 	string temp0, temp1;
-	if(stack.pop(temp0)) return true;
-	if(stack.pop(temp1)) return true;
+	if(!stack.pop(temp0)){
+		stack.push(temp0);
+		return false;
+	}
+	if(!stack.pop(temp1)){
+		stack.push(temp0);
+		return false;
+	}
+	stack.push(to_string(stod(temp0) + stod(temp1)));
 
-	return stack.push(to_string(stod(temp0) + stod(temp1)));
+	return true;
 
 }
 
@@ -134,22 +139,28 @@ bool add(Stack<string>& stack){
 bool subtract(Stack<string>& stack){
 
 	string temp0, temp1;
+	if(!stack.pop(temp0)){
+		stack.push(temp0);
+		return false;
+	}
+	if(!stack.pop(temp1)){
+		stack.push(temp0);
+		return false;
+	}
+	stack.push(to_string(stod(temp0) - stod(temp1)));
 
-	if(stack.pop(temp0)) return true;
-	if(stack.pop(temp1)) return true;
-
-	return stack.push(to_string(stod(temp0) - stod(temp1)));
+	return true;
 
 }
 
 
-bool printTop(Stack<string>& stack){
+void printTop(Stack<string>& stack){
 
 	string temp;
-	if(stack.pop(temp)) return true;
+	stack.pop(temp) ;
+	cout << "Top Value is: " << temp << endl;
 
-	cout << "The top is: " << temp;
-	return stack.push(temp);
+	stack.push(temp);
 
 }
 
@@ -159,18 +170,16 @@ void operateOnStack(Stack<string>& stack){
 
 	string op;
 	stack.pop(op);	
-	cout << "Operating" << endl;
 	
-
 	switch (op[0]) {
-		case '+':
-			while(add(stack)){};
-			break;
 		case '-':
 			while(subtract(stack)){};
 			break;
 		case '=':
 			printTop(stack);
+			break;
+		case '+':
+			while(add(stack)){};
 			break;
 		default:
 			cout << "Invalid operator" << endl;
@@ -178,6 +187,7 @@ void operateOnStack(Stack<string>& stack){
 	}
 
 }
+
 
 int main() {
 
@@ -194,7 +204,6 @@ int main() {
 			calc_stack.push(input);
 
 		} else if (getInputType(input) == OPE) {
-	cout << "entering ope" << endl;
 			
 			calc_stack.push(input);
 			operateOnStack(calc_stack);
