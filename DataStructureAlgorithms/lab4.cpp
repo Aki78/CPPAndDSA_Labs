@@ -58,9 +58,8 @@ public:
 
 class Calculator {
 	private:
-		string input;
+		string input, temp0, temp1;
 		Stack<string> stack;
-		string temp0, temp1;
 		
 
 	bool add(){
@@ -128,6 +127,7 @@ class Calculator {
 	}
 
 	public:
+
 	Calculator() {} 
 	void run() {
 
@@ -152,7 +152,6 @@ class Calculator {
 
 	}
 
-
 	bool getInputType(const string& input) {
 
 		stringstream ss(input);
@@ -167,108 +166,9 @@ class Calculator {
 
 		return BAD;
 	}
-
 	
 	
-	friend ostream& operator<<(ostream& os, const Calculator& my_time);
-	friend istream& operator>>(istream& is, const Calculator& my_time);
 };
-
-ostream& operator<<(ostream& os, const Calculator& my_time) {
-
-	return os;
-}
-
-istream& operator>>(istream& is, Calculator& other) {
-	string temp_string;
-	is >> temp_string;
-	return is;
-}
-
-bool getInputType(const string& input) {
-
-	stringstream ss(input);
-	double num;
-	if (ss >> num && ss.eof()) {
-		return NUM;
-	}
-
-	if (input == "+" || input == "-" || input == "=") {
-		return OPE;
-	}
-
-	return BAD;
-}
-
-bool add(Stack<string>& stack){
-
-	string temp0, temp1;
-	if(!stack.pop(temp0)){
-		stack.push(temp0);
-		return false;
-	}
-	if(!stack.pop(temp1)){
-		stack.push(temp0);
-		return false;
-	}
-	stack.push(to_string(stod(temp0) + stod(temp1)));
-
-	return true;
-
-}
-
-
-bool subtract(Stack<string>& stack){
-
-	string temp0, temp1;
-	if(!stack.pop(temp0)){
-		stack.push(temp0);
-		return false;
-	}
-	if(!stack.pop(temp1)){
-		stack.push(temp0);
-		return false;
-	}
-	stack.push(to_string(stod(temp0) - stod(temp1)));
-
-	return true;
-
-}
-
-
-void printTop(Stack<string>& stack){
-
-	string temp;
-	stack.pop(temp) ;
-	cout << "Top Value is: " << temp << endl;
-
-	stack.push(temp);
-
-}
-
-
-
-void operateOnStack(Stack<string>& stack){
-
-	string op;
-	stack.pop(op);	
-	
-	switch (op[0]) {
-		case '+':
-			while(add(stack)){};
-			break;
-		case '-':
-			while(subtract(stack)){};
-			break;
-		case '=':
-			printTop(stack);
-			break;
-		default:
-			cout << "Invalid operator" << endl;
-			break;
-	}
-
-}
 
 
 int main() {
