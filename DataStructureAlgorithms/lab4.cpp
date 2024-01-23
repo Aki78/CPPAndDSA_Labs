@@ -19,6 +19,7 @@ class Stack {
 private:
 	T   array[MAXN];
 	int top;
+
 public:
 
 // Implementations of operation functions
@@ -29,17 +30,16 @@ public:
 	bool push(T item) {
 		if (top >= MAXN - 1) return(false);
 		else {
-		array[++top] = item;
-		return (true);
+			array[++top] = item;
+			return (true);
 		}
 	}
 
 	bool pop(T &item) {
-		if (top == - 1)
-		return(false);
+		if (top == - 1) return(false);
 		else {
-		item = array[top--];
-		return (true);
+			item = array[top--];
+			return (true);
 		}
 	}
 
@@ -47,8 +47,7 @@ public:
 		int i;
 
 		cout << "\nStack is : ";
-		for (i = top; i >= 0 ; i-- )
-			cout << endl << array[i];
+		for (i = top; i >= 0 ; i-- ) cout << endl << array[i];
 
 		cout << endl;
 	}
@@ -57,51 +56,134 @@ public:
 };
 
 
+class Calculator {
+	private:
+		string input;
+		Stack<string> stack;
+		string temp0, temp1;
+		
+
+	bool add(){
+
+		if(!stack.pop(temp0)){
+			stack.push(temp0);
+			return false;
+		}
+		if(!stack.pop(temp1)){
+			stack.push(temp0);
+			return false;
+		}
+		stack.push(to_string(stod(temp0) + stod(temp1)));
+
+		return true;
+
+	}
 
 
-//class RPN {
-//
-//	private:
-//	public:
-//	RPN() {} 
-//	
-//	
-//	RPN subtract( RPN& other) {return *this;}
-//	RPN add( RPN& other) {return *this;}
-//	
-//	void display(){}
-//	
-//	bool lessThan(const RPN& other) const {return true;}
-//	
-//	RPN operator-( RPN& other) {
-//		return subtract(other);
-//	}
-//
-//	RPN operator+( RPN& other) {
-//		return add(other);
-//	}
-//	
-//	bool operator<(RPN& other){
-//		return lessThan(other);
-//	}
-//	bool operator==(const RPN& other) const {return true;}
-//	
-//	friend ostream& operator<<(ostream& os, const RPN& my_time);
-//	friend istream& operator>>(istream& is, const RPN& my_time);
-//};
-//
-//ostream& operator<<(ostream& os, const RPN& my_time) {
-//
-//	os << "HEllo World" << endl;
-//	return os;
-//}
-//
-//istream& operator>>(istream& is, RPN& other) {
-//	string temp_string;
-//	is >> temp_string;
-//	return is;
-//}
+	bool subtract(){
 
+		if(!stack.pop(temp0)){
+			stack.push(temp0);
+			return false;
+		}
+		if(!stack.pop(temp1)){
+			stack.push(temp0);
+			return false;
+		}
+		stack.push(to_string(stod(temp0) - stod(temp1)));
+
+		return true;
+
+	}
+
+	void printTop(){
+
+		stack.pop(temp0) ;
+		cout << "Top Value is: " << temp0 << endl;
+
+		stack.push(temp0);
+
+	}
+
+	void operateOnStack(){
+
+		string op;
+		stack.pop(op);	
+		
+		switch (op[0]) {
+			case '+':
+				while(add()){};
+				break;
+			case '-':
+				while(subtract()){};
+				break;
+			case '=':
+				printTop();
+				break;
+			default:
+				cout << "Invalid operator" << endl;
+				break;
+		}
+
+	}
+
+	public:
+	Calculator() {} 
+	void run() {
+
+		cout << "Enter a number or an operator (+, -, =)" << endl;
+		while (true) {
+
+			getline(cin, input);
+
+			if (getInputType(input) == NUM) {
+				stack.push(input);
+
+			} else if (getInputType(input) == OPE) {
+				
+				stack.push(input);
+				operateOnStack();
+
+			} else {
+
+				cout << "Incorrect" << endl;
+			}
+		}
+
+	}
+
+
+	bool getInputType(const string& input) {
+
+		stringstream ss(input);
+		double num;
+		if (ss >> num && ss.eof()) {
+			return NUM;
+		}
+
+		if (input == "+" || input == "-" || input == "=") {
+			return OPE;
+		}
+
+		return BAD;
+	}
+
+	
+	
+	friend ostream& operator<<(ostream& os, const Calculator& my_time);
+	friend istream& operator>>(istream& is, const Calculator& my_time);
+};
+
+ostream& operator<<(ostream& os, const Calculator& my_time) {
+
+	return os;
+}
+
+istream& operator>>(istream& is, Calculator& other) {
+	string temp_string;
+	is >> temp_string;
+	return is;
+}
 
 bool getInputType(const string& input) {
 
@@ -172,14 +254,14 @@ void operateOnStack(Stack<string>& stack){
 	stack.pop(op);	
 	
 	switch (op[0]) {
+		case '+':
+			while(add(stack)){};
+			break;
 		case '-':
 			while(subtract(stack)){};
 			break;
 		case '=':
 			printTop(stack);
-			break;
-		case '+':
-			while(add(stack)){};
 			break;
 		default:
 			cout << "Invalid operator" << endl;
@@ -191,28 +273,9 @@ void operateOnStack(Stack<string>& stack){
 
 int main() {
 
-	// Exercise 4A
-	string input;
-	Stack<string> calc_stack;
 
-	cout << "Enter a number or an operator (+, -, =)" << endl;
-	while (true) {
-
-		getline(cin, input);
-
-		if (getInputType(input) == NUM) {
-			calc_stack.push(input);
-
-		} else if (getInputType(input) == OPE) {
-			
-			calc_stack.push(input);
-			operateOnStack(calc_stack);
-
-		} else {
-
-			cout << "Incorrect" << endl;
-		}
-	}
+	Calculator calc;
+	calc.run();
 
 	return 0;
 }
