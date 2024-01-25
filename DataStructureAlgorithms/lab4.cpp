@@ -213,7 +213,6 @@ class CalculatorB1 {
 	}
 
 
-
 	vector<string> stringToCharVector(const string& str) {
 		vector<string> charVec;
 
