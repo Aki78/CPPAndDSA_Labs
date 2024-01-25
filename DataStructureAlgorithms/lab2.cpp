@@ -26,6 +26,7 @@ class Measurements {
 		getline(file, line);
 
 		data_length = stoi(line);
+//cout << data_length << endl;
 		data = new double[data_length];
 
 		getline(file, line); 
@@ -80,6 +81,7 @@ class Measurements {
 		}
 
 		data_length = 100;
+
 //  Why doesn't this work? it just crashes.
 // 		if (data != nullptr) {
 //			delete data;

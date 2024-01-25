@@ -15,7 +15,6 @@ template <class T>
 class Stack {
 
 
-
 private:
 	T   array[MAXN];
 	int top;
@@ -52,11 +51,11 @@ public:
 		cout << endl;
 	}
 
-
 };
 
 
 class Calculator {
+
 	private:
 		string input, temp0, temp1;
 		Stack<string> stack;
@@ -89,7 +88,7 @@ class Calculator {
 			stack.push(temp0);
 			return false;
 		}
-		stack.push(to_string(stod(temp0) - stod(temp1)));
+		stack.push(to_string(stod(temp1) - stod(temp0)));
 
 		return true;
 
@@ -99,7 +98,6 @@ class Calculator {
 
 		stack.pop(temp0) ;
 		cout << "Top Value is: " << temp0 << endl;
-
 		stack.push(temp0);
 
 	}
@@ -111,30 +109,32 @@ class Calculator {
 		
 		switch (op[0]) {
 			case '+':
-				while(add()){};
+				if(add());
 				break;
 			case '-':
-				while(subtract()){};
+				if(subtract());
 				break;
 			case '=':
 				printTop();
+				break;
+			case 'Q':
+				stack.print();
 				break;
 			default:
 				cout << "Invalid operator" << endl;
 				break;
 		}
-
 	}
 
 	public:
 
 	Calculator() {} 
 	void run() {
-
 		cout << "Enter a number or an operator (+, -, =)" << endl;
 		while (true) {
 
 			getline(cin, input);
+			
 
 			if (getInputType(input) == NUM) {
 				stack.push(input);
@@ -151,7 +151,6 @@ class Calculator {
 		}
 
 	}
-
 	bool getInputType(const string& input) {
 
 		stringstream ss(input);
@@ -160,14 +159,12 @@ class Calculator {
 			return NUM;
 		}
 
-		if (input == "+" || input == "-" || input == "=") {
+		if (input == "+" || input == "-" || input == "=" || input == "Q") {
 			return OPE;
 		}
 
 		return BAD;
 	}
-	
-	
 };
 
 
