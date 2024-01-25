@@ -1,0 +1,604 @@
+lab4.cpp: In member function ‘void CalculatorB1::printTop()’:
+lab4.cpp:183:27: error: cannot convert ‘Stack<std::__cxx11::basic_string<char> >’ to ‘std::__cxx11::basic_string<char>&’
+  183 |                 stack.pop(temp0) ;
+      |                           ^~~~~
+      |                           |
+      |                           Stack<std::__cxx11::basic_string<char> >
+lab4.cpp:38:21: note:   initializing argument 1 of ‘bool Stack<T>::pop(T&) [with T = std::__cxx11::basic_string<char>]’
+   38 |         bool pop(T &item) {
+      |                  ~~~^~~~
+lab4.cpp:184:42: error: no match for ‘operator<<’ (operand types are ‘std::basic_ostream<char>’ and ‘Stack<std::__cxx11::basic_string<char> >’)
+  184 |                 cout << "Top Value is: " << temp0 << endl;
+      |                 ~~~~~~~~~~~~~~~~~~~~~~~~ ^~ ~~~~~
+      |                      |                      |
+      |                      |                      Stack<std::__cxx11::basic_string<char> >
+      |                      std::basic_ostream<char>
+In file included from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/ostream:108:7: note: candidate: ‘std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(std::basic_ostream<_CharT, _Traits>::__ostream_type& (*)(std::basic_ostream<_CharT, _Traits>::__ostream_type&)) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]’
+  108 |       operator<<(__ostream_type& (*__pf)(__ostream_type&))
+      |       ^~~~~~~~
+/usr/include/c++/11/ostream:108:36: note:   no known conversion for argument 1 from ‘Stack<std::__cxx11::basic_string<char> >’ to ‘std::basic_ostream<char>::__ostream_type& (*)(std::basic_ostream<char>::__ostream_type&)’ {aka ‘std::basic_ostream<char>& (*)(std::basic_ostream<char>&)’}
+  108 |       operator<<(__ostream_type& (*__pf)(__ostream_type&))
+      |                  ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~
+/usr/include/c++/11/ostream:117:7: note: candidate: ‘std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(std::basic_ostream<_CharT, _Traits>::__ios_type& (*)(std::basic_ostream<_CharT, _Traits>::__ios_type&)) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>; std::basic_ostream<_CharT, _Traits>::__ios_type = std::basic_ios<char>]’
+  117 |       operator<<(__ios_type& (*__pf)(__ios_type&))
+      |       ^~~~~~~~
+/usr/include/c++/11/ostream:117:32: note:   no known conversion for argument 1 from ‘Stack<std::__cxx11::basic_string<char> >’ to ‘std::basic_ostream<char>::__ios_type& (*)(std::basic_ostream<char>::__ios_type&)’ {aka ‘std::basic_ios<char>& (*)(std::basic_ios<char>&)’}
+  117 |       operator<<(__ios_type& (*__pf)(__ios_type&))
+      |                  ~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+/usr/include/c++/11/ostream:127:7: note: candidate: ‘std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(std::ios_base& (*)(std::ios_base&)) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]’
+  127 |       operator<<(ios_base& (*__pf) (ios_base&))
+      |       ^~~~~~~~
+/usr/include/c++/11/ostream:127:30: note:   no known conversion for argument 1 from ‘Stack<std::__cxx11::basic_string<char> >’ to ‘std::ios_base& (*)(std::ios_base&)’
+  127 |       operator<<(ios_base& (*__pf) (ios_base&))
+      |                  ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+/usr/include/c++/11/ostream:166:7: note: candidate: ‘std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(long int) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]’
+  166 |       operator<<(long __n)
+      |       ^~~~~~~~
+/usr/include/c++/11/ostream:166:23: note:   no known conversion for argument 1 from ‘Stack<std::__cxx11::basic_string<char> >’ to ‘long int’
+  166 |       operator<<(long __n)
+      |                  ~~~~~^~~
+/usr/include/c++/11/ostream:170:7: note: candidate: ‘std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(long unsigned int) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]’
+  170 |       operator<<(unsigned long __n)
+      |       ^~~~~~~~
+/usr/include/c++/11/ostream:170:32: note:   no known conversion for argument 1 from ‘Stack<std::__cxx11::basic_string<char> >’ to ‘long unsigned int’
+  170 |       operator<<(unsigned long __n)
+      |                  ~~~~~~~~~~~~~~^~~
+/usr/include/c++/11/ostream:174:7: note: candidate: ‘std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(bool) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]’
+  174 |       operator<<(bool __n)
+      |       ^~~~~~~~
+/usr/include/c++/11/ostream:174:23: note:   no known conversion for argument 1 from ‘Stack<std::__cxx11::basic_string<char> >’ to ‘bool’
+  174 |       operator<<(bool __n)
+      |                  ~~~~~^~~
+In file included from /usr/include/c++/11/ostream:829,
+                 from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/bits/ostream.tcc:91:5: note: candidate: ‘std::basic_ostream<_CharT, _Traits>& std::basic_ostream<_CharT, _Traits>::operator<<(short int) [with _CharT = char; _Traits = std::char_traits<char>]’
+   91 |     basic_ostream<_CharT, _Traits>::
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/c++/11/bits/ostream.tcc:92:22: note:   no known conversion for argument 1 from ‘Stack<std::__cxx11::basic_string<char> >’ to ‘short int’
+   92 |     operator<<(short __n)
+      |                ~~~~~~^~~
+In file included from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/ostream:181:7: note: candidate: ‘std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(short unsigned int) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]’
+  181 |       operator<<(unsigned short __n)
+      |       ^~~~~~~~
+/usr/include/c++/11/ostream:181:33: note:   no known conversion for argument 1 from ‘Stack<std::__cxx11::basic_string<char> >’ to ‘short unsigned int’
+  181 |       operator<<(unsigned short __n)
+      |                  ~~~~~~~~~~~~~~~^~~
+In file included from /usr/include/c++/11/ostream:829,
+                 from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/bits/ostream.tcc:105:5: note: candidate: ‘std::basic_ostream<_CharT, _Traits>& std::basic_ostream<_CharT, _Traits>::operator<<(int) [with _CharT = char; _Traits = std::char_traits<char>]’
+  105 |     basic_ostream<_CharT, _Traits>::
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/c++/11/bits/ostream.tcc:106:20: note:   no known conversion for argument 1 from ‘Stack<std::__cxx11::basic_string<char> >’ to ‘int’
+  106 |     operator<<(int __n)
+      |                ~~~~^~~
+In file included from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/ostream:192:7: note: candidate: ‘std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(unsigned int) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]’
+  192 |       operator<<(unsigned int __n)
+      |       ^~~~~~~~
+/usr/include/c++/11/ostream:192:31: note:   no known conversion for argument 1 from ‘Stack<std::__cxx11::basic_string<char> >’ to ‘unsigned int’
+  192 |       operator<<(unsigned int __n)
+      |                  ~~~~~~~~~~~~~^~~
+/usr/include/c++/11/ostream:201:7: note: candidate: ‘std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(long long int) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]’
+  201 |       operator<<(long long __n)
+      |       ^~~~~~~~
+/usr/include/c++/11/ostream:201:28: note:   no known conversion for argument 1 from ‘Stack<std::__cxx11::basic_string<char> >’ to ‘long long int’
+  201 |       operator<<(long long __n)
+      |                  ~~~~~~~~~~^~~
+/usr/include/c++/11/ostream:205:7: note: candidate: ‘std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(long long unsigned int) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]’
+  205 |       operator<<(unsigned long long __n)
+      |       ^~~~~~~~
+/usr/include/c++/11/ostream:205:37: note:   no known conversion for argument 1 from ‘Stack<std::__cxx11::basic_string<char> >’ to ‘long long unsigned int’
+  205 |       operator<<(unsigned long long __n)
+      |                  ~~~~~~~~~~~~~~~~~~~^~~
+/usr/include/c++/11/ostream:220:7: note: candidate: ‘std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(double) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]’
+  220 |       operator<<(double __f)
+      |       ^~~~~~~~
+/usr/include/c++/11/ostream:220:25: note:   no known conversion for argument 1 from ‘Stack<std::__cxx11::basic_string<char> >’ to ‘double’
+  220 |       operator<<(double __f)
+      |                  ~~~~~~~^~~
+/usr/include/c++/11/ostream:224:7: note: candidate: ‘std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(float) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]’
+  224 |       operator<<(float __f)
+      |       ^~~~~~~~
+/usr/include/c++/11/ostream:224:24: note:   no known conversion for argument 1 from ‘Stack<std::__cxx11::basic_string<char> >’ to ‘float’
+  224 |       operator<<(float __f)
+      |                  ~~~~~~^~~
+/usr/include/c++/11/ostream:232:7: note: candidate: ‘std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(long double) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]’
+  232 |       operator<<(long double __f)
+      |       ^~~~~~~~
+/usr/include/c++/11/ostream:232:30: note:   no known conversion for argument 1 from ‘Stack<std::__cxx11::basic_string<char> >’ to ‘long double’
+  232 |       operator<<(long double __f)
+      |                  ~~~~~~~~~~~~^~~
+/usr/include/c++/11/ostream:245:7: note: candidate: ‘std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(const void*) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>]’
+  245 |       operator<<(const void* __p)
+      |       ^~~~~~~~
+/usr/include/c++/11/ostream:245:30: note:   no known conversion for argument 1 from ‘Stack<std::__cxx11::basic_string<char> >’ to ‘const void*’
+  245 |       operator<<(const void* __p)
+      |                  ~~~~~~~~~~~~^~~
+/usr/include/c++/11/ostream:250:7: note: candidate: ‘std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(std::nullptr_t) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__ostream_type = std::basic_ostream<char>; std::nullptr_t = std::nullptr_t]’
+  250 |       operator<<(nullptr_t)
+      |       ^~~~~~~~
+/usr/include/c++/11/ostream:250:18: note:   no known conversion for argument 1 from ‘Stack<std::__cxx11::basic_string<char> >’ to ‘std::nullptr_t’
+  250 |       operator<<(nullptr_t)
+      |                  ^~~~~~~~~
+In file included from /usr/include/c++/11/ostream:829,
+                 from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/bits/ostream.tcc:119:5: note: candidate: ‘std::basic_ostream<_CharT, _Traits>& std::basic_ostream<_CharT, _Traits>::operator<<(std::basic_ostream<_CharT, _Traits>::__streambuf_type*) [with _CharT = char; _Traits = std::char_traits<char>; std::basic_ostream<_CharT, _Traits>::__streambuf_type = std::basic_streambuf<char>]’
+  119 |     basic_ostream<_CharT, _Traits>::
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/c++/11/bits/ostream.tcc:120:34: note:   no known conversion for argument 1 from ‘Stack<std::__cxx11::basic_string<char> >’ to ‘std::basic_ostream<char>::__streambuf_type*’ {aka ‘std::basic_streambuf<char>*’}
+  120 |     operator<<(__streambuf_type* __sbin)
+      |                ~~~~~~~~~~~~~~~~~~^~~~~~
+In file included from /usr/include/c++/11/bits/basic_string.h:48,
+                 from /usr/include/c++/11/string:55,
+                 from /usr/include/c++/11/bits/locale_classes.h:40,
+                 from /usr/include/c++/11/bits/ios_base.h:41,
+                 from /usr/include/c++/11/ios:42,
+                 from /usr/include/c++/11/ostream:38,
+                 from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/string_view:667:5: note: candidate: ‘template<class _CharT, class _Traits> std::basic_ostream<_CharT, _Traits>& std::operator<<(std::basic_ostream<_CharT, _Traits>&, std::basic_string_view<_CharT, _Traits>)’
+  667 |     operator<<(basic_ostream<_CharT, _Traits>& __os,
+      |     ^~~~~~~~
+/usr/include/c++/11/string_view:667:5: note:   template argument deduction/substitution failed:
+lab4.cpp:184:45: note:   ‘Stack<std::__cxx11::basic_string<char> >’ is not derived from ‘std::basic_string_view<_CharT, _Traits>’
+  184 |                 cout << "Top Value is: " << temp0 << endl;
+      |                                             ^~~~~
+In file included from /usr/include/c++/11/string:55,
+                 from /usr/include/c++/11/bits/locale_classes.h:40,
+                 from /usr/include/c++/11/bits/ios_base.h:41,
+                 from /usr/include/c++/11/ios:42,
+                 from /usr/include/c++/11/ostream:38,
+                 from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/bits/basic_string.h:6531:5: note: candidate: ‘template<class _CharT, class _Traits, class _Alloc> std::basic_ostream<_CharT, _Traits>& std::operator<<(std::basic_ostream<_CharT, _Traits>&, const std::__cxx11::basic_string<_CharT, _Traits, _Allocator>&)’
+ 6531 |     operator<<(basic_ostream<_CharT, _Traits>& __os,
+      |     ^~~~~~~~
+/usr/include/c++/11/bits/basic_string.h:6531:5: note:   template argument deduction/substitution failed:
+lab4.cpp:184:45: note:   ‘Stack<std::__cxx11::basic_string<char> >’ is not derived from ‘const std::__cxx11::basic_string<_CharT, _Traits, _Allocator>’
+  184 |                 cout << "Top Value is: " << temp0 << endl;
+      |                                             ^~~~~
+In file included from /usr/include/c++/11/bits/ios_base.h:46,
+                 from /usr/include/c++/11/ios:42,
+                 from /usr/include/c++/11/ostream:38,
+                 from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/system_error:279:5: note: candidate: ‘template<class _CharT, class _Traits> std::basic_ostream<_CharT, _Traits>& std::operator<<(std::basic_ostream<_CharT, _Traits>&, const std::error_code&)’
+  279 |     operator<<(basic_ostream<_CharT, _Traits>& __os, const error_code& __e)
+      |     ^~~~~~~~
+/usr/include/c++/11/system_error:279:5: note:   template argument deduction/substitution failed:
+lab4.cpp:184:45: note:   cannot convert ‘((CalculatorB1*)this)->CalculatorB1::temp0’ (type ‘Stack<std::__cxx11::basic_string<char> >’) to type ‘const std::error_code&’
+  184 |                 cout << "Top Value is: " << temp0 << endl;
+      |                                             ^~~~~
+In file included from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/ostream:513:5: note: candidate: ‘template<class _CharT, class _Traits> std::basic_ostream<_CharT, _Traits>& std::operator<<(std::basic_ostream<_CharT, _Traits>&, _CharT)’
+  513 |     operator<<(basic_ostream<_CharT, _Traits>& __out, _CharT __c)
+      |     ^~~~~~~~
+/usr/include/c++/11/ostream:513:5: note:   template argument deduction/substitution failed:
+lab4.cpp:184:45: note:   deduced conflicting types for parameter ‘_CharT’ (‘char’ and ‘Stack<std::__cxx11::basic_string<char> >’)
+  184 |                 cout << "Top Value is: " << temp0 << endl;
+      |                                             ^~~~~
+In file included from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/ostream:518:5: note: candidate: ‘template<class _CharT, class _Traits> std::basic_ostream<_CharT, _Traits>& std::operator<<(std::basic_ostream<_CharT, _Traits>&, char)’
+  518 |     operator<<(basic_ostream<_CharT, _Traits>& __out, char __c)
+      |     ^~~~~~~~
+/usr/include/c++/11/ostream:518:5: note:   template argument deduction/substitution failed:
+lab4.cpp:184:45: note:   cannot convert ‘((CalculatorB1*)this)->CalculatorB1::temp0’ (type ‘Stack<std::__cxx11::basic_string<char> >’) to type ‘char’
+  184 |                 cout << "Top Value is: " << temp0 << endl;
+      |                                             ^~~~~
+In file included from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/ostream:524:5: note: candidate: ‘template<class _Traits> std::basic_ostream<char, _Traits>& std::operator<<(std::basic_ostream<char, _Traits>&, char)’
+  524 |     operator<<(basic_ostream<char, _Traits>& __out, char __c)
+      |     ^~~~~~~~
+/usr/include/c++/11/ostream:524:5: note:   template argument deduction/substitution failed:
+lab4.cpp:184:45: note:   cannot convert ‘((CalculatorB1*)this)->CalculatorB1::temp0’ (type ‘Stack<std::__cxx11::basic_string<char> >’) to type ‘char’
+  184 |                 cout << "Top Value is: " << temp0 << endl;
+      |                                             ^~~~~
+In file included from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/ostream:530:5: note: candidate: ‘template<class _Traits> std::basic_ostream<char, _Traits>& std::operator<<(std::basic_ostream<char, _Traits>&, signed char)’
+  530 |     operator<<(basic_ostream<char, _Traits>& __out, signed char __c)
+      |     ^~~~~~~~
+/usr/include/c++/11/ostream:530:5: note:   template argument deduction/substitution failed:
+lab4.cpp:184:45: note:   cannot convert ‘((CalculatorB1*)this)->CalculatorB1::temp0’ (type ‘Stack<std::__cxx11::basic_string<char> >’) to type ‘signed char’
+  184 |                 cout << "Top Value is: " << temp0 << endl;
+      |                                             ^~~~~
+In file included from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/ostream:535:5: note: candidate: ‘template<class _Traits> std::basic_ostream<char, _Traits>& std::operator<<(std::basic_ostream<char, _Traits>&, unsigned char)’
+  535 |     operator<<(basic_ostream<char, _Traits>& __out, unsigned char __c)
+      |     ^~~~~~~~
+/usr/include/c++/11/ostream:535:5: note:   template argument deduction/substitution failed:
+lab4.cpp:184:45: note:   cannot convert ‘((CalculatorB1*)this)->CalculatorB1::temp0’ (type ‘Stack<std::__cxx11::basic_string<char> >’) to type ‘unsigned char’
+  184 |                 cout << "Top Value is: " << temp0 << endl;
+      |                                             ^~~~~
+In file included from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/ostream:594:5: note: candidate: ‘template<class _CharT, class _Traits> std::basic_ostream<_CharT, _Traits>& std::operator<<(std::basic_ostream<_CharT, _Traits>&, const _CharT*)’
+  594 |     operator<<(basic_ostream<_CharT, _Traits>& __out, const _CharT* __s)
+      |     ^~~~~~~~
+/usr/include/c++/11/ostream:594:5: note:   template argument deduction/substitution failed:
+lab4.cpp:184:45: note:   mismatched types ‘const _CharT*’ and ‘Stack<std::__cxx11::basic_string<char> >’
+  184 |                 cout << "Top Value is: " << temp0 << endl;
+      |                                             ^~~~~
+In file included from /usr/include/c++/11/ostream:829,
+                 from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/bits/ostream.tcc:321:5: note: candidate: ‘template<class _CharT, class _Traits> std::basic_ostream<_CharT, _Traits>& std::operator<<(std::basic_ostream<_CharT, _Traits>&, const char*)’
+  321 |     operator<<(basic_ostream<_CharT, _Traits>& __out, const char* __s)
+      |     ^~~~~~~~
+/usr/include/c++/11/bits/ostream.tcc:321:5: note:   template argument deduction/substitution failed:
+lab4.cpp:184:45: note:   cannot convert ‘((CalculatorB1*)this)->CalculatorB1::temp0’ (type ‘Stack<std::__cxx11::basic_string<char> >’) to type ‘const char*’
+  184 |                 cout << "Top Value is: " << temp0 << endl;
+      |                                             ^~~~~
+In file included from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/ostream:611:5: note: candidate: ‘template<class _Traits> std::basic_ostream<char, _Traits>& std::operator<<(std::basic_ostream<char, _Traits>&, const char*)’
+  611 |     operator<<(basic_ostream<char, _Traits>& __out, const char* __s)
+      |     ^~~~~~~~
+/usr/include/c++/11/ostream:611:5: note:   template argument deduction/substitution failed:
+lab4.cpp:184:45: note:   cannot convert ‘((CalculatorB1*)this)->CalculatorB1::temp0’ (type ‘Stack<std::__cxx11::basic_string<char> >’) to type ‘const char*’
+  184 |                 cout << "Top Value is: " << temp0 << endl;
+      |                                             ^~~~~
+In file included from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/ostream:624:5: note: candidate: ‘template<class _Traits> std::basic_ostream<char, _Traits>& std::operator<<(std::basic_ostream<char, _Traits>&, const signed char*)’
+  624 |     operator<<(basic_ostream<char, _Traits>& __out, const signed char* __s)
+      |     ^~~~~~~~
+/usr/include/c++/11/ostream:624:5: note:   template argument deduction/substitution failed:
+lab4.cpp:184:45: note:   cannot convert ‘((CalculatorB1*)this)->CalculatorB1::temp0’ (type ‘Stack<std::__cxx11::basic_string<char> >’) to type ‘const signed char*’
+  184 |                 cout << "Top Value is: " << temp0 << endl;
+      |                                             ^~~~~
+In file included from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/ostream:629:5: note: candidate: ‘template<class _Traits> std::basic_ostream<char, _Traits>& std::operator<<(std::basic_ostream<char, _Traits>&, const unsigned char*)’
+  629 |     operator<<(basic_ostream<char, _Traits>& __out, const unsigned char* __s)
+      |     ^~~~~~~~
+/usr/include/c++/11/ostream:629:5: note:   template argument deduction/substitution failed:
+lab4.cpp:184:45: note:   cannot convert ‘((CalculatorB1*)this)->CalculatorB1::temp0’ (type ‘Stack<std::__cxx11::basic_string<char> >’) to type ‘const unsigned char*’
+  184 |                 cout << "Top Value is: " << temp0 << endl;
+      |                                             ^~~~~
+In file included from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/ostream:750:5: note: candidate: ‘template<class _Ostream, class _Tp> _Ostream&& std::operator<<(_Ostream&&, const _Tp&)’
+  750 |     operator<<(_Ostream&& __os, const _Tp& __x)
+      |     ^~~~~~~~
+/usr/include/c++/11/ostream:750:5: note:   template argument deduction/substitution failed:
+/usr/include/c++/11/ostream: In substitution of ‘template<class _Ostream, class _Tp> _Ostream&& std::operator<<(_Ostream&&, const _Tp&) [with _Ostream = std::basic_ostream<char>&; _Tp = Stack<std::__cxx11::basic_string<char> >]’:
+lab4.cpp:184:31:   required from here
+/usr/include/c++/11/ostream:750:5: error: no type named ‘type’ in ‘struct std::enable_if<false, void>’
+lab4.cpp:185:28: error: cannot convert ‘Stack<std::__cxx11::basic_string<char> >’ to ‘std::__cxx11::basic_string<char>’
+  185 |                 stack.push(temp0);
+      |                            ^~~~~
+      |                            |
+      |                            Stack<std::__cxx11::basic_string<char> >
+lab4.cpp:30:21: note:   initializing argument 1 of ‘bool Stack<T>::push(T) [with T = std::__cxx11::basic_string<char>]’
+   30 |         bool push(T item) {
+      |                   ~~^~~~
+lab4.cpp: In member function ‘int CalculatorB1::run()’:
+lab4.cpp:197:23: error: class template argument deduction failed:
+  197 |                 Stack opeStack;
+      |                       ^~~~~~~~
+lab4.cpp:197:23: error: no matching function for call to ‘Stack()’
+lab4.cpp:26:9: note: candidate: ‘template<class T> Stack()-> Stack<T>’
+   26 |         Stack() {
+      |         ^~~~~
+lab4.cpp:26:9: note:   template argument deduction/substitution failed:
+lab4.cpp:197:23: note:   couldn’t deduce template parameter ‘T’
+  197 |                 Stack opeStack;
+      |                       ^~~~~~~~
+lab4.cpp:16:7: note: candidate: ‘template<class T> Stack(Stack<T>)-> Stack<T>’
+   16 | class Stack {
+      |       ^~~~~
+lab4.cpp:16:7: note:   template argument deduction/substitution failed:
+lab4.cpp:197:23: note:   candidate expects 1 argument, 0 provided
+  197 |                 Stack opeStack;
+      |                       ^~~~~~~~
+lab4.cpp: In member function ‘std::vector<std::__cxx11::basic_string<char> > CalculatorB1::stringToCharVector(const string&)’:
+lab4.cpp:219:33: error: conversion from ‘const char’ to non-scalar type ‘std::string’ {aka ‘std::__cxx11::basic_string<char>’} requested
+  219 |                 for (string c : str) {
+      |                                 ^~~
+lab4.cpp:220:31: error: no match for ‘operator!=’ (operand types are ‘std::string’ {aka ‘std::__cxx11::basic_string<char>’} and ‘char’)
+  220 |                         if (c != ' ') {  // We don't want spaces do we, eh?
+      |                             ~ ^~ ~~~
+      |                             |    |
+      |                             |    char
+      |                             std::string {aka std::__cxx11::basic_string<char>}
+In file included from /usr/include/c++/11/iosfwd:40,
+                 from /usr/include/c++/11/ios:38,
+                 from /usr/include/c++/11/ostream:38,
+                 from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/bits/postypes.h:227:5: note: candidate: ‘template<class _StateT> bool std::operator!=(const std::fpos<_StateT>&, const std::fpos<_StateT>&)’
+  227 |     operator!=(const fpos<_StateT>& __lhs, const fpos<_StateT>& __rhs)
+      |     ^~~~~~~~
+/usr/include/c++/11/bits/postypes.h:227:5: note:   template argument deduction/substitution failed:
+lab4.cpp:220:34: note:   ‘std::string’ {aka ‘std::__cxx11::basic_string<char>’} is not derived from ‘const std::fpos<_StateT>’
+  220 |                         if (c != ' ') {  // We don't want spaces do we, eh?
+      |                                  ^~~
+In file included from /usr/include/c++/11/bits/stl_algobase.h:64,
+                 from /usr/include/c++/11/bits/char_traits.h:39,
+                 from /usr/include/c++/11/ios:40,
+                 from /usr/include/c++/11/ostream:38,
+                 from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/bits/stl_pair.h:496:5: note: candidate: ‘template<class _T1, class _T2> constexpr bool std::operator!=(const std::pair<_T1, _T2>&, const std::pair<_T1, _T2>&)’
+  496 |     operator!=(const pair<_T1, _T2>& __x, const pair<_T1, _T2>& __y)
+      |     ^~~~~~~~
+/usr/include/c++/11/bits/stl_pair.h:496:5: note:   template argument deduction/substitution failed:
+lab4.cpp:220:34: note:   ‘std::string’ {aka ‘std::__cxx11::basic_string<char>’} is not derived from ‘const std::pair<_T1, _T2>’
+  220 |                         if (c != ' ') {  // We don't want spaces do we, eh?
+      |                                  ^~~
+In file included from /usr/include/c++/11/bits/stl_algobase.h:67,
+                 from /usr/include/c++/11/bits/char_traits.h:39,
+                 from /usr/include/c++/11/ios:40,
+                 from /usr/include/c++/11/ostream:38,
+                 from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/bits/stl_iterator.h:432:5: note: candidate: ‘template<class _Iterator> constexpr bool std::operator!=(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_Iterator>&)’
+  432 |     operator!=(const reverse_iterator<_Iterator>& __x,
+      |     ^~~~~~~~
+/usr/include/c++/11/bits/stl_iterator.h:432:5: note:   template argument deduction/substitution failed:
+lab4.cpp:220:34: note:   ‘std::string’ {aka ‘std::__cxx11::basic_string<char>’} is not derived from ‘const std::reverse_iterator<_Iterator>’
+  220 |                         if (c != ' ') {  // We don't want spaces do we, eh?
+      |                                  ^~~
+In file included from /usr/include/c++/11/bits/stl_algobase.h:67,
+                 from /usr/include/c++/11/bits/char_traits.h:39,
+                 from /usr/include/c++/11/ios:40,
+                 from /usr/include/c++/11/ostream:38,
+                 from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/bits/stl_iterator.h:471:5: note: candidate: ‘template<class _IteratorL, class _IteratorR> constexpr bool std::operator!=(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_IteratorR>&)’
+  471 |     operator!=(const reverse_iterator<_IteratorL>& __x,
+      |     ^~~~~~~~
+/usr/include/c++/11/bits/stl_iterator.h:471:5: note:   template argument deduction/substitution failed:
+lab4.cpp:220:34: note:   ‘std::string’ {aka ‘std::__cxx11::basic_string<char>’} is not derived from ‘const std::reverse_iterator<_Iterator>’
+  220 |                         if (c != ' ') {  // We don't want spaces do we, eh?
+      |                                  ^~~
+In file included from /usr/include/c++/11/bits/stl_algobase.h:67,
+                 from /usr/include/c++/11/bits/char_traits.h:39,
+                 from /usr/include/c++/11/ios:40,
+                 from /usr/include/c++/11/ostream:38,
+                 from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/bits/stl_iterator.h:1602:5: note: candidate: ‘template<class _IteratorL, class _IteratorR> constexpr bool std::operator!=(const std::move_iterator<_IteratorL>&, const std::move_iterator<_IteratorR>&)’
+ 1602 |     operator!=(const move_iterator<_IteratorL>& __x,
+      |     ^~~~~~~~
+/usr/include/c++/11/bits/stl_iterator.h:1602:5: note:   template argument deduction/substitution failed:
+lab4.cpp:220:34: note:   ‘std::string’ {aka ‘std::__cxx11::basic_string<char>’} is not derived from ‘const std::move_iterator<_IteratorL>’
+  220 |                         if (c != ' ') {  // We don't want spaces do we, eh?
+      |                                  ^~~
+In file included from /usr/include/c++/11/bits/stl_algobase.h:67,
+                 from /usr/include/c++/11/bits/char_traits.h:39,
+                 from /usr/include/c++/11/ios:40,
+                 from /usr/include/c++/11/ostream:38,
+                 from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/bits/stl_iterator.h:1661:5: note: candidate: ‘template<class _Iterator> constexpr bool std::operator!=(const std::move_iterator<_IteratorL>&, const std::move_iterator<_IteratorL>&)’
+ 1661 |     operator!=(const move_iterator<_Iterator>& __x,
+      |     ^~~~~~~~
+/usr/include/c++/11/bits/stl_iterator.h:1661:5: note:   template argument deduction/substitution failed:
+lab4.cpp:220:34: note:   ‘std::string’ {aka ‘std::__cxx11::basic_string<char>’} is not derived from ‘const std::move_iterator<_IteratorL>’
+  220 |                         if (c != ' ') {  // We don't want spaces do we, eh?
+      |                                  ^~~
+In file included from /usr/include/c++/11/string:41,
+                 from /usr/include/c++/11/bits/locale_classes.h:40,
+                 from /usr/include/c++/11/bits/ios_base.h:41,
+                 from /usr/include/c++/11/ios:42,
+                 from /usr/include/c++/11/ostream:38,
+                 from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/bits/allocator.h:225:5: note: candidate: ‘template<class _T1, class _T2> bool std::operator!=(const std::allocator<_CharT>&, const std::allocator<_T2>&)’
+  225 |     operator!=(const allocator<_T1>&, const allocator<_T2>&)
+      |     ^~~~~~~~
+/usr/include/c++/11/bits/allocator.h:225:5: note:   template argument deduction/substitution failed:
+lab4.cpp:220:34: note:   ‘std::string’ {aka ‘std::__cxx11::basic_string<char>’} is not derived from ‘const std::allocator<_CharT>’
+  220 |                         if (c != ' ') {  // We don't want spaces do we, eh?
+      |                                  ^~~
+In file included from /usr/include/c++/11/bits/basic_string.h:48,
+                 from /usr/include/c++/11/string:55,
+                 from /usr/include/c++/11/bits/locale_classes.h:40,
+                 from /usr/include/c++/11/bits/ios_base.h:41,
+                 from /usr/include/c++/11/ios:42,
+                 from /usr/include/c++/11/ostream:38,
+                 from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/string_view:570:5: note: candidate: ‘template<class _CharT, class _Traits> constexpr bool std::operator!=(std::basic_string_view<_CharT, _Traits>, std::basic_string_view<_CharT, _Traits>)’
+  570 |     operator!=(basic_string_view<_CharT, _Traits> __x,
+      |     ^~~~~~~~
+/usr/include/c++/11/string_view:570:5: note:   template argument deduction/substitution failed:
+lab4.cpp:220:34: note:   ‘std::__cxx11::basic_string<char>’ is not derived from ‘std::basic_string_view<_CharT, _Traits>’
+  220 |                         if (c != ' ') {  // We don't want spaces do we, eh?
+      |                                  ^~~
+In file included from /usr/include/c++/11/bits/basic_string.h:48,
+                 from /usr/include/c++/11/string:55,
+                 from /usr/include/c++/11/bits/locale_classes.h:40,
+                 from /usr/include/c++/11/bits/ios_base.h:41,
+                 from /usr/include/c++/11/ios:42,
+                 from /usr/include/c++/11/ostream:38,
+                 from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/string_view:576:5: note: candidate: ‘template<class _CharT, class _Traits> constexpr bool std::operator!=(std::basic_string_view<_CharT, _Traits>, std::__type_identity_t<std::basic_string_view<_CharT, _Traits> >)’
+  576 |     operator!=(basic_string_view<_CharT, _Traits> __x,
+      |     ^~~~~~~~
+/usr/include/c++/11/string_view:576:5: note:   template argument deduction/substitution failed:
+lab4.cpp:220:34: note:   ‘std::__cxx11::basic_string<char>’ is not derived from ‘std::basic_string_view<_CharT, _Traits>’
+  220 |                         if (c != ' ') {  // We don't want spaces do we, eh?
+      |                                  ^~~
+In file included from /usr/include/c++/11/bits/basic_string.h:48,
+                 from /usr/include/c++/11/string:55,
+                 from /usr/include/c++/11/bits/locale_classes.h:40,
+                 from /usr/include/c++/11/bits/ios_base.h:41,
+                 from /usr/include/c++/11/ios:42,
+                 from /usr/include/c++/11/ostream:38,
+                 from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/string_view:583:5: note: candidate: ‘template<class _CharT, class _Traits> constexpr bool std::operator!=(std::__type_identity_t<std::basic_string_view<_CharT, _Traits> >, std::basic_string_view<_CharT, _Traits>)’
+  583 |     operator!=(__type_identity_t<basic_string_view<_CharT, _Traits>> __x,
+      |     ^~~~~~~~
+/usr/include/c++/11/string_view:583:5: note:   template argument deduction/substitution failed:
+lab4.cpp:220:34: note:   mismatched types ‘std::basic_string_view<_CharT, _Traits>’ and ‘char’
+  220 |                         if (c != ' ') {  // We don't want spaces do we, eh?
+      |                                  ^~~
+In file included from /usr/include/c++/11/string:55,
+                 from /usr/include/c++/11/bits/locale_classes.h:40,
+                 from /usr/include/c++/11/bits/ios_base.h:41,
+                 from /usr/include/c++/11/ios:42,
+                 from /usr/include/c++/11/ostream:38,
+                 from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/bits/basic_string.h:6302:5: note: candidate: ‘template<class _CharT, class _Traits, class _Alloc> bool std::operator!=(const std::__cxx11::basic_string<_CharT, _Traits, _Allocator>&, const std::__cxx11::basic_string<_CharT, _Traits, _Allocator>&)’
+ 6302 |     operator!=(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+      |     ^~~~~~~~
+/usr/include/c++/11/bits/basic_string.h:6302:5: note:   template argument deduction/substitution failed:
+lab4.cpp:220:34: note:   mismatched types ‘const std::__cxx11::basic_string<_CharT, _Traits, _Allocator>’ and ‘char’
+  220 |                         if (c != ' ') {  // We don't want spaces do we, eh?
+      |                                  ^~~
+In file included from /usr/include/c++/11/string:55,
+                 from /usr/include/c++/11/bits/locale_classes.h:40,
+                 from /usr/include/c++/11/bits/ios_base.h:41,
+                 from /usr/include/c++/11/ios:42,
+                 from /usr/include/c++/11/ostream:38,
+                 from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/bits/basic_string.h:6315:5: note: candidate: ‘template<class _CharT, class _Traits, class _Alloc> bool std::operator!=(const _CharT*, const std::__cxx11::basic_string<_CharT, _Traits, _Allocator>&)’
+ 6315 |     operator!=(const _CharT* __lhs,
+      |     ^~~~~~~~
+/usr/include/c++/11/bits/basic_string.h:6315:5: note:   template argument deduction/substitution failed:
+lab4.cpp:220:34: note:   mismatched types ‘const _CharT*’ and ‘std::__cxx11::basic_string<char>’
+  220 |                         if (c != ' ') {  // We don't want spaces do we, eh?
+      |                                  ^~~
+In file included from /usr/include/c++/11/string:55,
+                 from /usr/include/c++/11/bits/locale_classes.h:40,
+                 from /usr/include/c++/11/bits/ios_base.h:41,
+                 from /usr/include/c++/11/ios:42,
+                 from /usr/include/c++/11/ostream:38,
+                 from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/bits/basic_string.h:6327:5: note: candidate: ‘template<class _CharT, class _Traits, class _Alloc> bool std::operator!=(const std::__cxx11::basic_string<_CharT, _Traits, _Allocator>&, const _CharT*)’
+ 6327 |     operator!=(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+      |     ^~~~~~~~
+/usr/include/c++/11/bits/basic_string.h:6327:5: note:   template argument deduction/substitution failed:
+lab4.cpp:220:34: note:   mismatched types ‘const _CharT*’ and ‘char’
+  220 |                         if (c != ' ') {  // We don't want spaces do we, eh?
+      |                                  ^~~
+In file included from /usr/include/c++/11/bits/locale_facets.h:48,
+                 from /usr/include/c++/11/bits/basic_ios.h:37,
+                 from /usr/include/c++/11/ios:44,
+                 from /usr/include/c++/11/ostream:38,
+                 from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/bits/streambuf_iterator.h:232:5: note: candidate: ‘template<class _CharT, class _Traits> bool std::operator!=(const std::istreambuf_iterator<_CharT, _Traits>&, const std::istreambuf_iterator<_CharT, _Traits>&)’
+  232 |     operator!=(const istreambuf_iterator<_CharT, _Traits>& __a,
+      |     ^~~~~~~~
+/usr/include/c++/11/bits/streambuf_iterator.h:232:5: note:   template argument deduction/substitution failed:
+lab4.cpp:220:34: note:   ‘std::string’ {aka ‘std::__cxx11::basic_string<char>’} is not derived from ‘const std::istreambuf_iterator<_CharT, _Traits>’
+  220 |                         if (c != ' ') {  // We don't want spaces do we, eh?
+      |                                  ^~~
+In file included from /usr/include/c++/11/vector:67,
+                 from lab4.cpp:6:
+/usr/include/c++/11/bits/stl_vector.h:1937:5: note: candidate: ‘template<class _Tp, class _Alloc> bool std::operator!=(const std::vector<_Tp, _Alloc>&, const std::vector<_Tp, _Alloc>&)’
+ 1937 |     operator!=(const vector<_Tp, _Alloc>& __x, const vector<_Tp, _Alloc>& __y)
+      |     ^~~~~~~~
+/usr/include/c++/11/bits/stl_vector.h:1937:5: note:   template argument deduction/substitution failed:
+lab4.cpp:220:34: note:   ‘std::string’ {aka ‘std::__cxx11::basic_string<char>’} is not derived from ‘const std::vector<_Tp, _Alloc>’
+  220 |                         if (c != ' ') {  // We don't want spaces do we, eh?
+      |                                  ^~~
+In file included from /usr/include/c++/11/bits/stl_algobase.h:67,
+                 from /usr/include/c++/11/bits/char_traits.h:39,
+                 from /usr/include/c++/11/ios:40,
+                 from /usr/include/c++/11/ostream:38,
+                 from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/bits/stl_iterator.h:1171:5: note: candidate: ‘template<class _IteratorL, class _IteratorR, class _Container> bool __gnu_cxx::operator!=(const __gnu_cxx::__normal_iterator<_IteratorL, _Container>&, const __gnu_cxx::__normal_iterator<_IteratorR, _Container>&)’
+ 1171 |     operator!=(const __normal_iterator<_IteratorL, _Container>& __lhs,
+      |     ^~~~~~~~
+/usr/include/c++/11/bits/stl_iterator.h:1171:5: note:   template argument deduction/substitution failed:
+lab4.cpp:220:34: note:   ‘std::string’ {aka ‘std::__cxx11::basic_string<char>’} is not derived from ‘const __gnu_cxx::__normal_iterator<_IteratorL, _Container>’
+  220 |                         if (c != ' ') {  // We don't want spaces do we, eh?
+      |                                  ^~~
+In file included from /usr/include/c++/11/bits/stl_algobase.h:67,
+                 from /usr/include/c++/11/bits/char_traits.h:39,
+                 from /usr/include/c++/11/ios:40,
+                 from /usr/include/c++/11/ostream:38,
+                 from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/bits/stl_iterator.h:1179:5: note: candidate: ‘template<class _Iterator, class _Container> bool __gnu_cxx::operator!=(const __gnu_cxx::__normal_iterator<_Iterator, _Container>&, const __gnu_cxx::__normal_iterator<_Iterator, _Container>&)’
+ 1179 |     operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
+      |     ^~~~~~~~
+/usr/include/c++/11/bits/stl_iterator.h:1179:5: note:   template argument deduction/substitution failed:
+lab4.cpp:220:34: note:   ‘std::string’ {aka ‘std::__cxx11::basic_string<char>’} is not derived from ‘const __gnu_cxx::__normal_iterator<_Iterator, _Container>’
+  220 |                         if (c != ' ') {  // We don't want spaces do we, eh?
+      |                                  ^~~
+In file included from /usr/include/x86_64-linux-gnu/c++/11/bits/c++allocator.h:33,
+                 from /usr/include/c++/11/bits/allocator.h:46,
+                 from /usr/include/c++/11/string:41,
+                 from /usr/include/c++/11/bits/locale_classes.h:40,
+                 from /usr/include/c++/11/bits/ios_base.h:41,
+                 from /usr/include/c++/11/ios:42,
+                 from /usr/include/c++/11/ostream:38,
+                 from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/ext/new_allocator.h:190:9: note: candidate: ‘template<class _Up> bool __gnu_cxx::operator!=(const __gnu_cxx::new_allocator<char>&, const __gnu_cxx::new_allocator<_Tp>&)’
+  190 |         operator!=(const new_allocator&, const new_allocator<_Up>&)
+      |         ^~~~~~~~
+/usr/include/c++/11/ext/new_allocator.h:190:9: note:   template argument deduction/substitution failed:
+lab4.cpp:220:34: note:   mismatched types ‘const __gnu_cxx::new_allocator<_Tp>’ and ‘char’
+  220 |                         if (c != ' ') {  // We don't want spaces do we, eh?
+      |                                  ^~~
+In file included from /usr/include/c++/11/bits/ios_base.h:46,
+                 from /usr/include/c++/11/ios:42,
+                 from /usr/include/c++/11/ostream:38,
+                 from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/system_error:416:3: note: candidate: ‘bool std::operator!=(const std::error_code&, const std::error_code&)’
+  416 |   operator!=(const error_code& __lhs, const error_code& __rhs) noexcept
+      |   ^~~~~~~~
+/usr/include/c++/11/system_error:416:32: note:   no known conversion for argument 1 from ‘std::string’ {aka ‘std::__cxx11::basic_string<char>’} to ‘const std::error_code&’
+  416 |   operator!=(const error_code& __lhs, const error_code& __rhs) noexcept
+      |              ~~~~~~~~~~~~~~~~~~^~~~~
+/usr/include/c++/11/system_error:421:3: note: candidate: ‘bool std::operator!=(const std::error_code&, const std::error_condition&)’
+  421 |   operator!=(const error_code& __lhs, const error_condition& __rhs) noexcept
+      |   ^~~~~~~~
+/usr/include/c++/11/system_error:421:32: note:   no known conversion for argument 1 from ‘std::string’ {aka ‘std::__cxx11::basic_string<char>’} to ‘const std::error_code&’
+  421 |   operator!=(const error_code& __lhs, const error_condition& __rhs) noexcept
+      |              ~~~~~~~~~~~~~~~~~~^~~~~
+/usr/include/c++/11/system_error:426:3: note: candidate: ‘bool std::operator!=(const std::error_condition&, const std::error_code&)’
+  426 |   operator!=(const error_condition& __lhs, const error_code& __rhs) noexcept
+      |   ^~~~~~~~
+/usr/include/c++/11/system_error:426:37: note:   no known conversion for argument 1 from ‘std::string’ {aka ‘std::__cxx11::basic_string<char>’} to ‘const std::error_condition&’
+  426 |   operator!=(const error_condition& __lhs, const error_code& __rhs) noexcept
+      |              ~~~~~~~~~~~~~~~~~~~~~~~^~~~~
+/usr/include/c++/11/system_error:431:3: note: candidate: ‘bool std::operator!=(const std::error_condition&, const std::error_condition&)’
+  431 |   operator!=(const error_condition& __lhs,
+      |   ^~~~~~~~
+/usr/include/c++/11/system_error:431:37: note:   no known conversion for argument 1 from ‘std::string’ {aka ‘std::__cxx11::basic_string<char>’} to ‘const std::error_condition&’
+  431 |   operator!=(const error_condition& __lhs,
+      |              ~~~~~~~~~~~~~~~~~~~~~~~^~~~~
+In file included from /usr/include/c++/11/string:41,
+                 from /usr/include/c++/11/bits/locale_classes.h:40,
+                 from /usr/include/c++/11/bits/ios_base.h:41,
+                 from /usr/include/c++/11/ios:42,
+                 from /usr/include/c++/11/ostream:38,
+                 from /usr/include/c++/11/iostream:39,
+                 from lab4.cpp:1:
+/usr/include/c++/11/bits/allocator.h:209:7: note: candidate: ‘bool std::operator!=(const std::allocator<char>&, const std::allocator<char>&)’
+  209 |       operator!=(const allocator&, const allocator&) _GLIBCXX_NOTHROW
+      |       ^~~~~~~~
+/usr/include/c++/11/bits/allocator.h:209:18: note:   no known conversion for argument 1 from ‘std::string’ {aka ‘std::__cxx11::basic_string<char>’} to ‘const std::allocator<char>&’
+  209 |       operator!=(const allocator&, const allocator&) _GLIBCXX_NOTHROW
+      |                  ^~~~~~~~~~~~~~~~
+lab4.cpp: In member function ‘int CalculatorB1::run()’:
+lab4.cpp:212:9: warning: control reaches end of non-void function [-Wreturn-type]
+  212 |         }
+      |         ^
