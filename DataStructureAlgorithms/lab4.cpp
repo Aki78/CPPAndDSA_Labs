@@ -54,7 +54,7 @@ public:
 };
 
 
-class Calculator {
+class CalculatorA {
 
 	private:
 		string input, temp0, temp1;
@@ -109,10 +109,10 @@ class Calculator {
 		
 		switch (op[0]) {
 			case '+':
-				if(add());
+				add();
 				break;
 			case '-':
-				if(subtract());
+				subtract();
 				break;
 			case '=':
 				printTop();
@@ -128,7 +128,7 @@ class Calculator {
 
 	public:
 
-	Calculator() {} 
+	CalculatorA() {} 
 	void run() {
 		cout << "Enter a number or an operator (+, -, =)" << endl;
 		while (true) {
@@ -170,9 +170,11 @@ class Calculator {
 
 int main() {
 
-
-	Calculator calc;
+// Part A
+	CalculatorA calc;
 	calc.run();
+// Part B
+
 
 	return 0;
 }
