@@ -217,11 +217,11 @@ class CalculatorB1 {
 		vector<string> charVec;
 
 
-	    for (char c : str) {
+		for (char c : str) {
 		if (c != ' ') {  
-		    charVec.push_back(std::string(1, c));  
+			charVec.push_back(std::string(1, c));  
 		}
-	    }
+		}
 
 		return charVec;
 	}
@@ -241,6 +241,13 @@ class CalculatorB1 {
 		return BAD;
 	}
 	void infixTopostfix(char *infix, char *postfix){
+	}
+
+
+	int precedence(char op) {
+		if(op == '*') return 2;
+		if(op == '+') return 1;
+		return 0;
 	}
 };
 
