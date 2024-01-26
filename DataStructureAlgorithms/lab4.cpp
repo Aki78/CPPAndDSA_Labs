@@ -175,8 +175,6 @@ class CalculatorB1 {
 		Stack<string> stack;
 		string temp0;
 		string input;
-		
-
 
 	void printTop(){
 
@@ -218,9 +216,9 @@ class CalculatorB1 {
 
 
 		for (char c : str) {
-		if (c != ' ') {  
-			charVec.push_back(std::string(1, c));  
-		}
+			if (c != ' ') {  
+				charVec.push_back(std::string(1, c));  
+			}
 		}
 
 		return charVec;
@@ -240,7 +238,26 @@ class CalculatorB1 {
 
 		return BAD;
 	}
+
 	void infixTopostfix(char *infix, char *postfix){
+
+		for(char c : infix) {
+			if(isdigit(c)) {
+				postfix += c;
+			} else if(c == '+' || c == '*') {
+				while(!stack.empty() && precedence(c) <= precedence(stack.top())) {
+					postfix += stack.top();
+					stack.pop();
+				}
+				stack.push(c);
+			}
+		}
+
+		while(!stack.empty()) {
+			postfix += stack.top();
+			stack.pop();
+		}
+
 	}
 
 
