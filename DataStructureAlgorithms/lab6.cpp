@@ -54,7 +54,6 @@ public:
 		}
 		else{
 			while (aux1 -> _pNext != NULL) {
-				printf("\n data is %c\n", aux1->_value); //for testing purposes
 				aux1 = aux1->_pNext;
 cout << "test "<< endl;
 			}
@@ -79,6 +78,8 @@ cout << "test "<< endl;
 		}
 		out << endl;
 	}
+
+
 };
 
 // Implementation of list
@@ -104,6 +105,11 @@ class NodeData {
 };
 
 
+ostream& operator<< (ostream& stream, const NodeData *p) {
+	return p->print(stream);
+}
+
+
 class Complex: public NodeData{
 private:
 
@@ -111,35 +117,56 @@ private:
 	double y;
 
 
+public:
+
 	Complex(double x0=0, double y0=0):x(x0),y(y0){}
 
-    virtual ostream& print(ostream &stream) const override {
-        stream << x << " + " << y << "i";
-        return stream;
-    }
+	virtual ostream& print(ostream &stream) const override {
+		stream << x << " + " << y << "i";
+		return stream;
+	}
 
 
-    virtual bool operator<(NodeData *node) override {
-        Complex *complexNode = dynamic_cast<Complex*>(node);
-        if (!complexNode) {
-            return false; 
-        }
-        
-        return (x * x + y * y) < 
-               (complexNode->x * complexNode->x + complexNode->y * complexNode->y);
-    }
+
+	virtual bool operator<(NodeData *node) override {
+		Complex *complexNode = dynamic_cast<Complex*>(node);
+//		Complex *complexNode = node; // Did not work...
+		if (!complexNode) {
+			return false; 
+		}
+		
+		return (x * x + y * y) < (complexNode->x * complexNode->x + complexNode->y * complexNode->y);
+	}
 
 
-    friend ostream& operator<< (ostream& stream, const Complex &c) {
-        return c.print(stream);
-    }
+	friend ostream& operator<< (ostream& stream, const Complex &c) {
+		return c.print(stream);
+	}
 
 
 };
 
-ostream& operator<< (ostream& stream, const NodeData *p) {
-    return p->print(stream);
-}
+
+class String : public NodeData {
+private:
+	std::string value;
+
+public:
+	String(const std::string &val) : value(val) {}
+
+	virtual ostream& print(ostream &stream) const override {
+		stream << value;
+		return stream;
+	}
+
+	virtual bool operator<(NodeData *other) override {
+		String *stringOther = dynamic_cast<String*>(other);
+		if (!stringOther) {
+			return false; // or handle differently
+		}
+		return value < stringOther->value;
+	}
+};
 
 
 
@@ -162,11 +189,11 @@ int main ()  {
 
 
 LinkedList<NodeData *> list;
-//list.insert_to_end(new String("First complex number")).insert_to_end(new Complex(1, 3));
-//list.insert_to_end(new String("Second complex number")).insert_to_end(new Complex(5, 9));
-list.insert_to_end(new Complex(1, 3));
-list.insert_to_end(new Complex(5, 9));
-list.print();
+//list.insert_to_end(new Complex(1, 3));
+//list.insert_to_end(new Complex(5, 9));
+list.insert_to_end(new String("First complex number")).insert_to_end(new Complex(1, 3));
+list.insert_to_end(new String("Second complex number")).insert_to_end(new Complex(5, 9));
+list.print(cout);
 
 
 
