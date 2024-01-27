@@ -6,6 +6,9 @@ using namespace std;
 
 
 // Interface of list
+
+//====PartA=======================================================
+
 template <class T>
 class LinkedList {
 private:
@@ -87,13 +90,84 @@ ostream &operator<<(ostream &out,  LinkedList<T> const &data) {
 }
 
 
+//====PartB=======================================================
 
+
+class NodeData {
+
+	friend ostream& operator<< (ostream& stream, const NodeData *p);
+
+	public:
+	virtual ostream& print(ostream &stream) const = 0;
+	virtual bool operator<(NodeData *) = 0;
+
+};
+
+
+class Complex: public NodeData{
+private:
+
+	double x;
+	double y;
+
+
+	Complex(double x0=0, double y0=0):x(x0),y(y0){}
+
+    virtual ostream& print(ostream &stream) const override {
+        stream << x << " + " << y << "i";
+        return stream;
+    }
+
+
+    virtual bool operator<(NodeData *node) override {
+        Complex *complexNode = dynamic_cast<Complex*>(node);
+        if (!complexNode) {
+            return false; 
+        }
+        
+        return (x * x + y * y) < 
+               (complexNode->x * complexNode->x + complexNode->y * complexNode->y);
+    }
+
+
+    friend ostream& operator<< (ostream& stream, const Complex &c) {
+        return c.print(stream);
+    }
+
+
+};
+
+ostream& operator<< (ostream& stream, const NodeData *p) {
+    return p->print(stream);
+}
+
+
+
+
+
+//================================================================
 // Application
-int main (void)  {
-	LinkedList<char> list;
+int main ()  {
 
-	list.insert_to_end('a').insert_to_end('b').insert_to_end('c').insert_to_end('d');
+// Bart A
+//	LinkedList<char> list;
+//
+//	list.insert_to_end('a').insert_to_end('b').insert_to_end('c').insert_to_end('d');
+//
+//	cout << list;
 
-	cout << list;
-	cout << list;
+
+
+// Bart B
+
+
+LinkedList<NodeData *> list;
+//list.insert_to_end(new String("First complex number")).insert_to_end(new Complex(1, 3));
+//list.insert_to_end(new String("Second complex number")).insert_to_end(new Complex(5, 9));
+list.insert_to_end(new Complex(1, 3));
+list.insert_to_end(new Complex(5, 9));
+list.print();
+
+
+
 }
