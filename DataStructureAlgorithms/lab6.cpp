@@ -20,16 +20,13 @@ private:
 	};
 
 	Node *first;
-	Node *last;
+//	Node *last;
 
 public:
 
-
-
-
 	LinkedList() {
 		first = NULL;
-		last = NULL;
+	//	last = NULL;
 	}
 
 	~LinkedList() {
@@ -39,18 +36,31 @@ public:
 		while (aux1 != NULL) {
 			aux2 = aux1->_pNext;
 			delete aux1;
-			printf("\nDeleted"); //for testing purposes
+			printf("Deleted\n"); //for testing purposes
 			aux1 = aux2;
 		}
 	}
 
 	LinkedList<T>& insert_to_end(T data) {
+		Node *aux1, *aux2;
+
+		aux1 = first;
 		Node *newnode = new Node(data);
-		if (first == NULL)
+		if (first == NULL){
 			first = newnode;		//first node
-		else
-			last->_pNext = newnode;	//not first node
-		last = newnode;
+		}
+		else{
+			while (aux1 -> _pNext != NULL) {
+				printf("\n data is %c\n", aux1->_value); //for testing purposes
+				aux1 = aux1->_pNext;
+cout << "test "<< endl;
+			}
+			aux1-> _pNext = newnode;
+
+		}			
+			
+//			last->_pNext = newnode;	//not first node
+//		last = newnode;
 
 		return *this;
 	}
@@ -84,5 +94,6 @@ int main (void)  {
 
 	list.insert_to_end('a').insert_to_end('b').insert_to_end('c').insert_to_end('d');
 
+	cout << list;
 	cout << list;
 }
