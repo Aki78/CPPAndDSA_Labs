@@ -4,6 +4,7 @@
 #include <termios.h>
 #include <unistd.h>
 
+#define N 100000
 
 
 using namespace std;
@@ -99,34 +100,82 @@ char getChar() {
 
 // Application
 int main() {
-	Queue<char> queue;
-	bool		succeed;
-	char		chr;
+//	  Part A
 
-	cout << "\nEnter a letter to be queued ";
-	cout << "\nor digit 1 to dequeue a letter";
-	cout << "\nor Return to quit a program\n";
+//	Queue<char> queue;
+//	bool		succeed;
+//	char		chr;
+//
+//	cout << "\nEnter a letter to be queued ";
+//	cout << "\nor digit 1 to dequeue a letter";
+//	cout << "\nor Return to quit a program\n";
+//
+////	chr = _getche();
+//	chr = getChar(); //I had to use this because _getche is windows specific and doesn't exist in linux
+//	while (chr != '\n' && chr != '\r') {
+//		if (isalpha(chr)) {
+//			succeed=queue.enqueue(chr);
+//			queue.print();
+//			if (!succeed)
+//				printf("\n Enqueue operation failed\n");
+//		}
+//		if (chr == '1') {
+//			succeed = queue.dequeue(chr);
+//			if  (succeed) {
+//				cout << "\na letter dequeued " << chr << " ";
+//				queue.print();
+//			} else
+//				cout << "\nDequeue operation failed\n ";
+//		}
+////			chr = _getche();
+//			std::cin.get();
+//	}
 
-//	chr = _getche();
-	chr = getChar(); //I had to use this because _getche is windows specific and doesn't exist in linux
-	while (chr != '\n' && chr != '\r') {
-		if (isalpha(chr)) {
-			succeed=queue.enqueue(chr);
-			queue.print();
-			if (!succeed)
-				printf("\n Enqueue operation failed\n");
+
+
+
+//	  Part B
+
+
+	Queue<int> queue;
+	int item;
+	clock_t tic, tac;
+	double duration;
+	int i;
+
+
+	cout << "Fill the queue with " << N << " items\n";
+	item = 0;
+	for (i = 0; i < N; i++) {
+		if (!queue.enqueue(item++)) {
+			cerr << "Enqueue failed\n";
+			exit(1);
 		}
-		if (chr == '1') {
-			succeed = queue.dequeue(chr);
-			if  (succeed) {
-				cout << "\na letter dequeued " << chr << " ";
-				queue.print();
-			} else
-				cout << "\nDequeue operation failed\n ";
-		}
-//			chr = _getche();
-			std::cin.get();
 	}
+	cout << "Remove half of them\n";
+	for (i = 0; i < N/2; i++) {
+		if (!queue.dequeue(item)) {
+			cerr << "Dequeue failed\n";
+			exit(1);
+		}
+	}
+	cout << "Add then new " << N/2 << " items to the queue\n";
+	item++;
+	for (i = 0; i < N/2; i++) {
+		if (!queue.enqueue(item++)) {
+			cerr << "Enqueue failed\n";
+			exit(1);
+		}
+	}
+	// then we deque elements and measure the execution time
+	cout << "Then dequeue them\n";
+	tic = clock();
+	for (i = 0; i < N; i++) queue.dequeue(item);
+	tac = clock();
+	cout << "Last item value " << item << " (should be " << N-1 << ")\n";
+	cout << "(tic " << tic << ", tac " << tac << ")\n";
+	duration = (double)(tac - tic) / CLOCKS_PER_SEC;
+	cout << "\ndequeue took " << duration / (double)N*1e6 << " us to run\n";
 	
 	return 0;
 }
