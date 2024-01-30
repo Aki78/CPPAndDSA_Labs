@@ -156,9 +156,9 @@ class CalculatorB1 {
 
 	int dealWithOperators(int new_prec, string new_ope_string){
 
-		if(opestack.pop(temp0) == -1){
+		if(!opestack.pop(temp0)){
 			postfix.push(new_ope_string);
-			postfix.print();
+//			postfix.print();
 			return 0;
 		}
 		int old_prec =  precedence(temp0);
@@ -170,7 +170,10 @@ class CalculatorB1 {
 			return 0;
 		}
 		else if(old_prec < new_prec ){
+			opestack.push(temp0);
 			opestack.push(new_ope_string);
+			cout << "Ope stack:" << endl;
+			opestack.print();
 			postfix.print();
 			return 0;
 		}
