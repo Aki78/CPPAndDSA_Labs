@@ -113,7 +113,7 @@ class CalculatorB1 {
 	}
 
 
-	bool getInputType(const char& input) {
+	int getInputType(const char& input) {
 		string input_string (1,input);
 
 		stringstream ss(input_string);
@@ -129,7 +129,7 @@ class CalculatorB1 {
 			return OPE;
 		}
 
-		cout << "GEtting BAD"<< endl;
+		cout << "GEtting BAD"<< input << endl;
 		return BAD;
 	}
 
