@@ -143,31 +143,45 @@ class CalculatorB1 {
 		for(int i=0; i < infix.size(); i++){
 			string char_string (1,infix[i]);
 			int input_type = getInputType(infix[i]);
-			cout << "input Tyep: " << input_type << endl;
+		//	cout << "input Tyep: " << input_type << endl;
 			if(input_type == NUM) postfix.push(char_string);
 			else if (input_type == OPE){dealWithOperators(precedence(infix[i]), char_string);}
 			else dealWithBadInput();
 		}
+		while(opestack.pop(temp0)){ cout << "AAA: " << temp0 << endl; postfix.push(temp0);}
 		infix = "";
+		postfix.print();
 	}
 
 
-	int dealWithOperators(int prec, string new_ope_string){
+	int dealWithOperators(int new_prec, string new_ope_string){
 
-		cout << "Dealing..." << endl;
 		if(opestack.pop(temp0) == -1){
-			postfix.push(my_string);
+			postfix.push(new_ope_string);
+			postfix.print();
 			return 0;
 		}
-`
+		int old_prec =  precedence(temp0);
 
-		if(precedence(temp0) == prec){
+		if(old_prec == new_prec){
 			opestack.push(new_ope_string);
 			postfix.push(temp0);
+			postfix.print();
 			return 0;
-		};
-		if(postfix.pop(temp0) > );
+		}
+		else if(old_prec < new_prec ){
+			opestack.push(new_ope_string);
+			postfix.print();
+			return 0;
+		}
+		else if(old_prec > new_prec ){
+			postfix.push(temp0);
+			opestack.push(new_ope_string);
+			postfix.print();
+			return 0;
+		}
 
+		return 1;
 	}
 
 
