@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <sstream>
+# include <sstream>
 #include <stdexcept>
 #include <cctype>
 #include <vector>
@@ -61,16 +61,18 @@ public:
 class CalculatorB1 {
 
 	private:
-		Stack<string> stack;
+		Stack<string> postfix;
+		string infix;
 		string temp0;
 		string input;
 		Stack<string> tempStack;
+		bool ErrorStatus = false;
 
 	void printTop(){
 
-		stack.pop(temp0) ;
+		postfix.pop(temp0) ;
 		cout << "Top Value is: " << temp0 << endl;
-		stack.push(temp0);
+		postfix.push(temp0);
 
 	}
 
@@ -79,65 +81,86 @@ class CalculatorB1 {
 	CalculatorB1() {} 
 	int run() {
 		cout << "Give an infix equation at one line" << endl;
-		getline(cin, input);
-		stack.print();
 
-		infixToPostfix(input);
+		infixToPostfix();
+		if(ErrorStatus==true)
+			for(int i = 0; i < 100; i++) 
+				postfix.pop(temp0);
+
+		postfix.print();
+
 		
 		printTop();
 
 		return 0;
 	}
 
-
-	vector<string> stringToCharVector(const string& str) {
-		vector<string> charVec;
-
-
-		for (char c : str) {
-			if (c != ' ') {  
-				charVec.push_back(string(1, c));  
+	
+	string removeSpaces(string input) {
+		string output;
+		for (char c : input) {
+			if (c != ' ') {
+				output += c;
 			}
 		}
-
-		return charVec;
+		return output;
 	}
 
-//	bool getInputType(const string& input) {
-//
-//		stringstream ss(input);
-//		double num;
-//		if (ss >> num && ss.eof()) {
-//			return NUM;
-//		}
-//
-//		if (input == "+" || input == "-" || input == "*" || input == "/" ||  input == "=" || input == "Q") {
-//			return OPE;
-//		}
-//
-//		return BAD;
-//	}
+	void readLine() {
+		getline(cin, infix);
+		infix = removeSpaces(infix);
+		
+	}
 
-	void infixToPostfix(string& infix){
-		for(char c : infix) {
 
-			string cString = string(1, c);
-			if(isdigit(c)) {
-				stack.push(cString);
-			} else if(c == '+' || c == '*') {
-				while(tempStack.pop(temp0) > -1 ) {
-					if (precedence(c) <= precedence(temp0[0]))
-						stack.push(temp0);
-				}
-					tempStack.push(cString);
-			}
+	bool getInputType(const char& input) {
+		string input_string (1,input);
+
+		stringstream ss(input_string);
+		double num;
+//			cout << "prepping number"<< endl;
+		if (ss >> num && ss.eof()) {
+//			cout << "GEtting number"<< endl;
+			return NUM;
 		}
 
-		while(tempStack.pop(temp0) > -1) {
-			stack.push(temp0);
+		if (input == '+' ||  input == '*' ||  input == '=' || input == 'Q') {
+			cout << "GEtting operator: "<< input << endl;
+			return OPE;
 		}
+
+		cout << "GEtting BAD"<< endl;
+		return BAD;
+	}
+
+	void infixToPostfix(){
+		readLine();
+		for(int i=0; i < infix.size(); i++){
+			string char_string (1,infix[i]);
+			int input_type = getInputType(infix[i]);
+			cout << "input Tyep: " << input_type << endl;
+			if(input_type == NUM) postfix.push(char_string);
+			else if (input_type == OPE){dealWithOperators();}
+			else dealWithBadInput();
+		}
+		infix = "";
+	}
+
+
+	void dealWithOperators(){
+
+		cout << "Dealing" << endl;
 
 	}
+
+
+	void dealWithBadInput(){
+
+		cout << "Bad iput" << endl;
+		ErrorStatus = true;
+		infix = "";
+	}
+
 
 
 	int precedence(char op) {
