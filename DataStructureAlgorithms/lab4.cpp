@@ -62,6 +62,7 @@ class CalculatorB1 {
 
 	private:
 		Stack<string> postfix;
+		Stack<string> opestack;
 		string infix;
 		string temp0;
 		string input;
@@ -80,17 +81,21 @@ class CalculatorB1 {
 
 	CalculatorB1() {} 
 	int run() {
-		cout << "Give an infix equation at one line" << endl;
+		while(!ErrorStatus){
+			cout << "Give an infix equation at one line" << endl;
 
-		infixToPostfix();
-		if(ErrorStatus==true)
-			for(int i = 0; i < 100; i++) 
-				postfix.pop(temp0);
+			infixToPostfix();
+			if(ErrorStatus==true)
+				for(int i = 0; i < 100; i++) 
+					postfix.pop(temp0);
 
-		postfix.print();
+			postfix.print();
 
-		
-		printTop();
+			
+			printTop();
+		}
+
+		cout << "Bad input, program terminado" << endl;
 
 		return 0;
 	}
@@ -140,16 +145,28 @@ class CalculatorB1 {
 			int input_type = getInputType(infix[i]);
 			cout << "input Tyep: " << input_type << endl;
 			if(input_type == NUM) postfix.push(char_string);
-			else if (input_type == OPE){dealWithOperators();}
+			else if (input_type == OPE){dealWithOperators(precedence(infix[i]), char_string);}
 			else dealWithBadInput();
 		}
 		infix = "";
 	}
 
 
-	void dealWithOperators(){
+	int dealWithOperators(int prec, string new_ope_string){
 
-		cout << "Dealing" << endl;
+		cout << "Dealing..." << endl;
+		if(opestack.pop(temp0) == -1){
+			postfix.push(my_string);
+			return 0;
+		}
+`
+
+		if(precedence(temp0) == prec){
+			opestack.push(new_ope_string);
+			postfix.push(temp0);
+			return 0;
+		};
+		if(postfix.pop(temp0) > );
 
 	}
 
@@ -166,6 +183,12 @@ class CalculatorB1 {
 	int precedence(char op) {
 		if(op == '*') return 2;
 		else if(op == '+') return 1;
+		return 0;
+	}
+
+	int precedence(string op) {
+		if(op == "*") return 2;
+		else if(op == "+") return 1;
 		return 0;
 	}
 
