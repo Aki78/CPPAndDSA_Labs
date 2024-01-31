@@ -117,6 +117,7 @@ cout << "test "<< endl;
 	}
 
 	bool find_pos(T item, int &pos){
+		pos = 0;
 		if (first != NULL){
 			Node *aux1; 
 			Node  aux2;
@@ -124,11 +125,10 @@ cout << "test "<< endl;
 			aux1 = first;
 
 			while (aux1 -> _pNext != NULL) {
-				aux2 = *aux1;
+				if(aux1->_value == item) return true;
+				pos++;
 				aux1 = aux1->_pNext;
 			}
-			delete[] aux1-> _pNext;
-			aux2._pNext = NULL;
 		}
 			
 		return false;
