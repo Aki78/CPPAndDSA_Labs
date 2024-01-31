@@ -184,6 +184,12 @@ class CalculatorB1 {
 			return 0;
 		}
 
+		while (new_prec <= old_prec):
+                // Pop operators with higher or equal precedence and append them to the postfix expression
+                postfixExpression.append(operatorStack.pop())
+            // Push the current operator onto the stack
+            operatorStack.push(token)
+
 		return 1;
 	}
 
