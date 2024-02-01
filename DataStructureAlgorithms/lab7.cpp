@@ -111,7 +111,7 @@ cout << "test "<< endl;
 			aux1 = first;
 
 			while (aux1 != NULL) {
-				aux2 = aux1;
+				aux2 = aux1; // If I delete this, heisenbug dissapears ( but gives wrong solution)
 cout << "looping... " << endl;
 				aux1 = aux1->_pNext;
 			}
