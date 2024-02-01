@@ -65,25 +65,29 @@ cout << "test "<< endl;
 	void print(ostream &out) const {
 		Node *what;
 
-		out << "\nList:";
-		what = first;
-		while (what != NULL) {
-			out << " " << what->_value << " ";
-			what = what->_pNext;
+		if (first != NULL){
+			out << "\nList:";
+			what = first;
+			while (what != NULL) { // ????? Error, letting 
+				out << " " << what->_value << " ";
+				what = what->_pNext;
+			}
+			out << endl;
 		}
-		out << endl;
 	}
 
 	void print() const {
 		Node *what;
 
-		cout << "\nList:";
-		what = first;
-		while (what != NULL) {
-			cout << " " << what->_value << " ";
-			what = what->_pNext;
+		if (first != NULL){
+			cout << "\nList:";
+			what = first;
+			while (what != NULL) {
+				cout << " " << what->_value << " ";
+				what = what->_pNext;
+			}
+			cout << endl;
 		}
-		cout << endl;
 	}
 
 
@@ -91,9 +95,9 @@ cout << "test "<< endl;
 		if (first != NULL){
 			Node *aux1, *aux2;
 			aux1 = first;
-			aux2 = aux1->_pNext;
+			first = first->_pNext;
+			cout << "Deleting inner...: " << first->_value << endl;
 			delete[] aux1;
-			aux1 = aux2;
 		}
 
 	}
@@ -102,16 +106,17 @@ cout << "test "<< endl;
 
 		if (first != NULL){
 			Node *aux1; 
-			Node  aux2;
+			Node *aux2;
 			
 			aux1 = first;
 
-			while (aux1 -> _pNext != NULL) {
-				aux2 = *aux1;
+			while (aux1 != NULL) {
+				aux2 = aux1;
+cout << "looping... " << endl;
 				aux1 = aux1->_pNext;
 			}
-			delete[] aux1-> _pNext;
-			aux2._pNext = NULL;
+			delete[] aux2;
+//			aux2->_pNext = NULL;
 		}
 			
 	}
@@ -125,9 +130,9 @@ cout << "test "<< endl;
 			aux1 = first;
 
 			while (aux1 -> _pNext != NULL) {
-				if(aux1->_value == item) return true;
 				pos++;
 				aux1 = aux1->_pNext;
+				if(aux1->_value == item) return true;
 			}
 		}
 			
@@ -165,6 +170,7 @@ int main ()  {
 	list.insert_to_end('d');
 	list.insert_to_end('y');
 	list.print();
+	list.print();
 	cout << "Enter first character to be searced\n";
 	cin >> to_be_searched;
 	if (list.find_pos(to_be_searched, order_no))
@@ -179,8 +185,11 @@ int main ()  {
 	else
 		cout << "Not found\n";
 	list.delete_first();
+	cout << "Deleting First\n";
 	cout << list;
+	cout << "Deleted First\n";
 	list.delete_last();
+cout << "final list" << endl;
 	cout << list;
 
 	return (EXIT_SUCCESS);
