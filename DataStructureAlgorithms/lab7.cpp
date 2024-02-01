@@ -7,7 +7,6 @@ using namespace std;
 
 // Interface of list
 
-//====PartA=======================================================
 
 template <class T>
 class LinkedList {
@@ -68,7 +67,7 @@ cout << "test "<< endl;
 		if (first != NULL){
 			out << "\nList:";
 			what = first;
-			while (what != NULL) { // ????? Error, letting 
+			while (what != NULL) { 
 				out << " " << what->_value << " ";
 				what = what->_pNext;
 			}
@@ -104,19 +103,22 @@ cout << "test "<< endl;
 
 	void delete_last(){
 
-		if (first != NULL){
-			Node *aux1; 
-			Node *aux2;
-			
-			aux1 = first;
+		 if (first != NULL) {
+			  if (first->_pNext == NULL) {
+				  delete first;
+				  first = NULL;
+			  } else {
+				  Node *aux1 = first;
+				  Node *aux2 = NULL;
 
-			while (aux1 != NULL) {
-				aux2 = aux1; // If I delete this, heisenbug dissapears ( but gives wrong solution)
-cout << "looping... " << endl;
-				aux1 = aux1->_pNext;
-			}
-			delete[] aux2;
-//			aux2->_pNext = NULL;
+				  while (aux1->_pNext != NULL) {
+					   aux2 = aux1;
+					   aux1 = aux1->_pNext;
+				  }
+
+				  aux2->_pNext = NULL;
+				  delete aux1;
+		     }
 		}
 			
 	}
