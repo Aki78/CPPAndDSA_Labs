@@ -4,112 +4,13 @@
 #include <vector>
 #include <unistd.h>
 #include <termios.h>
+#include <list>
+#include <algorithm> 
 
 
 #define  MAX 10
 
 using namespace std;
-
-template <class T>
-class List {
-
-private:
-	int count;
-	T   array[MAX];
-	void compress(T *array, int empty_slot, int n) {
-
-		for (int i = empty_slot + 1; i < n; i++)
-			array[i - 1] = array[i];
-	}
-
-public:
-
-	List() {
-		count = 0;
-	}
-
-	bool empty() {
-		return count == 0;
-	}
-
-	int size() {
-		return count;
-	}
-
-	const T &operator[](int i) const {
-		if (count > 0 && i <= count)
-			return array[i - 1];
-		else
-			throw range_error("Index error");
-	}
-
-	bool insert_to_end(T item) {
-		if (count < MAX) {
-			array[count++] = item;
-			return true;
-		}
-		else
-			return false;
-	}
-
-
-	bool insert_to_begin(T item) {
-		if (count < MAX) {
-			count++;
-			array[count] = array[count - 1];
-			array[0] = item;
-			return true;
-		}
-		else
-			return false;
-	}
-
-	bool insert(T item) {
-		if (count < MAX) {
-			for (int i = 0; i < count+1; i++){
-				if (array[i] < item) {
-					for (int j = i; j < count+1; j++){
-						array[j+1] = array[j];
-					}
-						++count;
-						array[i] = item;
-						return true;
-					}
-				}
-
-				array[count++] = item;
-				return true;
-			}
-		else
-			return false;
-		}
-
-	bool find_pos(T item, int *pos) {
-		int i;
-
-		for (i = 0; i < count; i++) {
-			if (array[i] == item) {
-				*pos = i;
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	bool del(int orderNo) {
-		if (orderNo >= 0 && orderNo < count) {
-			//take item out means nothing
-			compress(array, orderNo, count);
-			--count; 	// or should this be inside compress
-			return true;
-		}
-		else
-			return false;
-	}
-
-
-};
 
 
 class Time {
@@ -118,17 +19,8 @@ class Time {
 	public:
 		string temp_string;
 
-	Time(int h, int m){
-		hour = h;
-		minute = m;
-
-	} 
-
-	Time(char h, char m){
-		hour = h - '0';
-		minute = m - '0';
-
-	} 
+	Time(int h, int m){hour = h; minute = m;} 
+	Time(char h, char m){hour = h - '0'; minute = m - '0';}
 	Time(): hour(0), minute(0){} 
 		
 	void read(string print_me){
@@ -235,6 +127,17 @@ istream& operator>>(istream& is, Time& time2) {
 }
 
 
+void printTimes(std::list<Time> my_times){
+        cout << "Result list:" << endl;
+	auto it = my_times.begin();
+        cout << *it ;
+	++it;
+	for (; it != my_times.end(); ++it) {
+		cout << *it;
+	}
+
+}
+
 
 
 //Application
@@ -248,13 +151,14 @@ int main () {
 
 
 
-	List<Time> list;
+	std::list<Time> list;
 	vector<int> inputVec;
 	Time item;
 	int i = 0;
 	int num;
 
 	vector<int>::iterator it;
+	std::list<Time>::iterator list_it;
 
 
 // getting the inputs
@@ -269,7 +173,7 @@ int main () {
 		c2 = c;
 		cout <<  c << " " ;
 		if (c1 == '0' && c2 == '0') break;
-		if (i > 0 && ( i%2 != 0)) list.insert(Time(c1,c2));
+		if (i > 0 && ( i%2 != 0)) list.push_back(Time(c1,c2));
 		++i;
 	}
 
@@ -278,23 +182,15 @@ int main () {
 		std::cout << *it << " ";
 	}
 
-	 //Print the contents of the list
-	 for (i = 1; i <= list.size(); i++)
-		 cout << "\n " << i << "th item was \n" << list[i];
-	 cout << "\nDelete list items ?";
-	 cin >> item;
-	 while (!(item == Time(0, 0))) {
-		if(list.find_pos(item, &i)) {
-			cout << "\nThe position of the item in list is \n" << i;
-			list.del(i);
-		 } else
-			cout << "\nItem not found";
-			cin >> item;
-		 }
-	 //Print the contents of the list
-	 for (i = 1; i <= list.size(); i++)
-		cout << "\n " << i << "th item was " << list[i];
 	cout << endl;
+	for (list_it = list.begin(); list_it != list.end(); ++list_it) {
+		cout << *list_it << endl;
+	}
+	printTimes(list);
+
+	 //Print the contents of the list
+//	 for (i = 1; i <= list.size(); i++) cout << "\n " << i << "th item was " << list[i];
+//	cout << endl;
 
 
     tcsetattr(STDIN_FILENO, TCSANOW, &oldt); // Restore old terminal settings
