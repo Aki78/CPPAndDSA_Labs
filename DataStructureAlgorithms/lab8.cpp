@@ -117,7 +117,6 @@ ostream& operator<<(std::ostream& os, const Time& my_time) {
 	os << ":";
 	if (my_time.get_minute() < 10 ) os << "0" << abs(my_time.get_minute());
 	else os << abs(my_time.get_minute());
-	os << endl;
 	return os;
 }
 
@@ -139,13 +138,26 @@ istream& operator>>(istream& is, Time& time2) {
 void printTimes(std::list<Time> my_times){
         cout << "Result list:" << endl;
 	auto it = my_times.begin();
-        cout << *it ;
+        cout << *it << endl ;
 	++it;
 	for (; it != my_times.end(); ++it) {
-		cout << *it;
+		cout << *it << endl;
 	}
 
 }
+
+void printDiff(std::list<Time> my_times){
+        cout << "Result list:" << endl;
+
+	auto it = my_times.begin();
+        cout << " " << *it << " 00:00" << endl ;
+
+	for (; it != my_times.end(); ++it) {
+                cout << " " << *it <<  " " << *it - *it++ << endl ;
+		std::advance(it,-1);
+        }
+}
+
 
 
 
@@ -198,6 +210,8 @@ int main () {
 //	list.sort(std::less<Time>());
 	cout << "Sorted list:" << endl;
 	printTimes(list);
+	cout << "Time difference" << endl;
+	printDiff(list);
 
 
 	 //Print the contents of the list
