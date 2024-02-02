@@ -82,6 +82,11 @@ class Time {
 		if (time2.hour != hour) return time2.get_hour() < hour;
 		else return  time2.get_minute() < minute;
 	}
+
+	bool greaterThan(const Time& time2) const {
+		if (time2.hour != hour) return time2.get_hour() > hour;
+		else return  time2.get_minute() > minute;
+	}
 	
 	Time operator-( Time& time2) {
 		return subtract(time2);
@@ -91,8 +96,12 @@ class Time {
 		return add(time2);
 	}
 	
-	bool operator<(Time& time2){
+	bool operator<( const Time& time2) const{
 		return lessThan(time2);
+	}
+
+	bool operator>( const Time& time2) const{
+		return greaterThan(time2);
 	}
 	bool operator==(const Time& time2) const {
 		return (hour == time2.hour) && (minute == time2.minute);
@@ -183,10 +192,13 @@ int main () {
 	}
 
 	cout << endl;
-	for (list_it = list.begin(); list_it != list.end(); ++list_it) {
-		cout << *list_it << endl;
-	}
+	cout << "Unsorted list:" << endl;
 	printTimes(list);
+	list.sort(std::greater<Time>());
+//	list.sort(std::less<Time>());
+	cout << "Sorted list:" << endl;
+	printTimes(list);
+
 
 	 //Print the contents of the list
 //	 for (i = 1; i <= list.size(); i++) cout << "\n " << i << "th item was " << list[i];
