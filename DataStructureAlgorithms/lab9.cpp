@@ -3,6 +3,7 @@
 #include <vector>
 #include <map>
 #include <sstream>
+#include <algorithm>
 
 
 using namespace std;
@@ -34,28 +35,30 @@ vector<string> getConcatenatedAndLastElement(const vector<string>& A) {
 	return B;
 }
 
+string trimEnd(const string& str) {
+
+	auto endPos = find_if(str.rbegin(), str.rend(), [](char ch) { // Lambda function!!! Yay :D
+		return !isspace(ch);
+	}).base();
+
+	return string(str.begin(), endPos);
+}
+
 
 int main() {
-	// Create a map using a binary search tree
-	map<int, int> bst;
+	
+	map<string, int> bst;
 	string a = "Hello Wrodl 20";
 	vector<string> b = getConcatenatedAndLastElement(split_num(a));
 	cout << "b0: " << b[0] << endl;
 	cout << "b1: " << b[1] << endl;
 	
 
-	// Insert elements into the binary search tree
-	bst.insert({50, 0});
-	bst.insert({30, 0});
-	bst.insert({20, 0});
-	bst.insert({40, 0});
-	bst.insert({70, 0});
-	bst.insert({60, 0});
-	bst.insert({80, 0});
+	bst.insert({trimEnd(b[0]), stoi(b[1])});
 
 	cout << "Searching for elements in the binary search tree:\n";
-	cout << "Is 30 present? " << (bst.find(30) != bst.end() ? "Yes" : "No") << endl;
-	cout << "Is 45 present? " << (bst.find(45) != bst.end() ? "Yes" : "No") << endl;
+	cout << "Is 30 present? " << (bst.find("Hello Wrodl") != bst.end() ? "Yes" : "No") << endl;
+	cout << "Is 45 present? " << (bst.find("a") != bst.end() ? "Yes" : "No") << endl;
 
 	cout << "Elements of the binary search tree in ascending order:\n";
 	for (const auto& pair : bst) {
