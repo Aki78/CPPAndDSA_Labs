@@ -46,7 +46,7 @@ string trimEnd(const string& str) {
 
 
 int main() {
-	
+	string input;	
 	map<string, int> bst;
 	string a = "Hello Wrodl 20";
 	vector<string> b = getConcatenatedAndLastElement(split_num(a));
@@ -56,15 +56,24 @@ int main() {
 
 	bst.insert({trimEnd(b[0]), stoi(b[1])});
 
-	cout << "Searching for elements in the binary search tree:\n";
-	cout << "Is 30 present? " << (bst.find("Hello Wrodl") != bst.end() ? "Yes" : "No") << endl;
-	cout << "Is 45 present? " << (bst.find("a") != bst.end() ? "Yes" : "No") << endl;
+	while(true){
+		getline(std::cin, input);
+		b =  b = getConcatenatedAndLastElement(split_num(input));
+		bst.insert({trimEnd(b[0]), stoi(b[1])});
+		cout << "Searching for elements in the binary search tree:\n";
+		cout << "Is 30 present? " << (bst.find("Hello Wrodl") != bst.end() ? "Yes" : "No") << endl;
+		cout << "Is 45 present? " << (bst.find("a") != bst.end() ? "Yes" : "No") << endl;
 
-	cout << "Elements of the binary search tree in ascending order:\n";
-	for (const auto& pair : bst) {
-		cout << pair.first << " ";
+
+
+		cout << "Elements of the binary search tree in ascending order:\n";
+		for (const auto& pair : bst) {
+			cout << pair.first << " " << pair.second << endl;
+		}
+		cout << endl;
 	}
-	cout << endl;
+
+
 
 	return 0;
 }
