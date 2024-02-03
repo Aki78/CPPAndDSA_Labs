@@ -281,6 +281,7 @@ ostream &operator<<(ostream &out,  Tdbl<T> const &data) {
 //==========Part C====================================================
 
 
+template <class T>
 class Matrix {
 private:
 	// definition of the list node class
@@ -308,7 +309,7 @@ private:
 	~Matrix(){}
 
 
-}
+};
 //Application
 int main () {
 
@@ -358,7 +359,7 @@ int main () {
 	printTimes(list);
 	list.sort(std::greater<Time>());
 //	list.sort(std::less<Time>());
-	out << "Sorted list:" << endl;
+	cout << "Sorted list:" << endl;
 	printTimes(list);
 	cout << "Time difference" << endl;
 	printDiff(list);
