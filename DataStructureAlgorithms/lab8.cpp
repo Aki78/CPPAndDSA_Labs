@@ -294,6 +294,20 @@ private:
 	};
 
 
+	class RowNode {
+	public:
+		int rowInd;
+		Node* colHead;
+		RowNode(int r) : rowInd(r), colHead(NULL){}
+	};
+
+	RowNode* firstR;
+	RowNode* lastR;
+
+	Matrix(): firstR(NULL), lastR(NULL) {}
+	~Matrix(){}
+
+
 }
 //Application
 int main () {
@@ -344,7 +358,7 @@ int main () {
 	printTimes(list);
 	list.sort(std::greater<Time>());
 //	list.sort(std::less<Time>());
-	cout << "Sorted list:" << endl;
+	out << "Sorted list:" << endl;
 	printTimes(list);
 	cout << "Time difference" << endl;
 	printDiff(list);
