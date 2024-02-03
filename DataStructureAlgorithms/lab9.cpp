@@ -24,7 +24,12 @@ vector<string> getConcatenatedAndLastElement(const vector<string>& A) {
 	vector<string> B;
 	
 	string concatenated;
-	for (size_t i = 0; i < A.size() - 1; ++i) {
+	B.push_back(A[0]);
+	if (A.size() == 2){
+		B.push_back(A[1]);
+		return B;
+	}
+	for (size_t i = 1; i < A.size() - 1; ++i) {
 		concatenated += A[i];
 		concatenated += " ";
 		
@@ -44,33 +49,49 @@ string trimEnd(const string& str) {
 	return string(str.begin(), endPos);
 }
 
+void print(map<string,int> bst){
+	cout << "Content of the phonebook:" << endl;
+	for (const auto& pair : bst) {
+		cout << pair.first << ":  " << pair.second << endl;
+	}
+	cout << endl;
+
+}
+
+void handleDelete(map<string,int>& bst, const string s){
+	auto it = bst.find(s);
+	cout << "deleting " << s << endl; 
+	if (it != bst.end()) bst.erase(s);
+	else cout << "Name "  << s <<  " does not exist" << endl;
+}
+
 
 int main() {
 	string input;	
 	map<string, int> bst;
 	string a = "Hello Wrodl 20";
 	vector<string> b = getConcatenatedAndLastElement(split_num(a));
-	cout << "b0: " << b[0] << endl;
-	cout << "b1: " << b[1] << endl;
+	cout << "b0: " << b[1] << endl;
+	cout << "b1: " << b[2] << endl;
 	
 
-	bst.insert({trimEnd(b[0]), stoi(b[1])});
+	bst.insert({trimEnd(b[1]), stoi(b[2])});
 
 	while(true){
-		getline(std::cin, input);
-		b =  b = getConcatenatedAndLastElement(split_num(input));
-		bst.insert({trimEnd(b[0]), stoi(b[1])});
-		cout << "Searching for elements in the binary search tree:\n";
-		cout << "Is 30 present? " << (bst.find("Hello Wrodl") != bst.end() ? "Yes" : "No") << endl;
-		cout << "Is 45 present? " << (bst.find("a") != bst.end() ? "Yes" : "No") << endl;
+		getline(cin, input);
+		b =  getConcatenatedAndLastElement(split_num(input));
+		cout << b[0] <<  " " << b[1] << endl;
+		if(b[0] == "add") bst.insert({trimEnd(b[1]), stoi(b[2])});
+		else if(b[0] == "list") print(bst); 
+		else if(b[0] == "delete") handleDelete(bst, b[1]); 
+		else cout <<  "Unrecognized command " << b[0] << endl; 
 
 
+	if (input == "exit") {
+		std::cout << "Exiting the program..." << std::endl;
+		break; // Exit the loop
+	}
 
-		cout << "Elements of the binary search tree in ascending order:\n";
-		for (const auto& pair : bst) {
-			cout << pair.first << " " << pair.second << endl;
-		}
-		cout << endl;
 	}
 
 
