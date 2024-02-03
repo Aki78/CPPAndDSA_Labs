@@ -13,7 +13,7 @@
 using namespace std;
 
 
-//==========Part B====================================================
+//==========Part A====================================================
 class Time {
 	private:
 		int hour, minute;
@@ -277,6 +277,24 @@ ostream &operator<<(ostream &out,  Tdbl<T> const &data) {
 }
 
 
+
+//==========Part C====================================================
+
+
+class Matrix {
+private:
+	// definition of the list node class
+	class Node {
+	public:
+		T _value;	
+		Node *_pNext;	
+		Node() : _pNext(NULL){}
+		Node(T val) : _value(val), _pNext(NULL){}
+		Node(T val, Node* next) : _value(val), _pNext(next){}
+	};
+
+
+}
 //Application
 int main () {
 
