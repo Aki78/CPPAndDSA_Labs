@@ -308,13 +308,24 @@ private:
 	Matrix(): firstR(NULL), lastR(NULL) {}
 	~Matrix(){}
 
+	void insert(T val, int r, int c) {
+		RowNode* newR = NULL;
+		if(firstR!=NULL) {newR = new RowNode(r); firstR = lastR = newR;}
+		else dealWithInsert(val, r, c);
+	}
+
+	void dealWithInsert(T val, int r, int c){
+		RowNode* _prevR = NULL;
+		RowNode* _thisR = firstR;
+	}
+
 
 };
 //Application
 int main () {
 
 // Part A
-
+// This  might only work on linux
 	struct termios oldt, newt;
 	tcgetattr(STDIN_FILENO, &oldt); // Save old terminal settings
 	newt = oldt;
