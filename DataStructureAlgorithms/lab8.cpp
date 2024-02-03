@@ -206,7 +206,21 @@ public:
 		Node *newnode = new Node(data);
 
 		if (first == NULL) first = newnode; //first node
-		else last->_pNext = newnode; //not first node
+		else { last->_pNext = newnode; newnode -> _pPrev = last;} //not first node
+
+		last = newnode;
+			
+		return *this;
+	}
+
+	Tdbl<T>& insert_to_front(T data) {
+		Node *aux1, *aux2;
+
+		aux1 = first;
+		Node *newnode = new Node(data);
+
+		if (first == NULL) first = newnode; //first node
+		else{ last->_pNext = newnode; newnode -> _pPrev = last;} //not first node
 
 		last = newnode;
 			
