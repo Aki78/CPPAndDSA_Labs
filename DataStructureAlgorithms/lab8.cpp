@@ -13,6 +13,7 @@
 using namespace std;
 
 
+//==========Part B====================================================
 class Time {
 	private:
 		int hour, minute;
@@ -136,9 +137,9 @@ istream& operator>>(istream& is, Time& time2) {
 
 
 void printTimes(std::list<Time> my_times){
-        cout << "Result list:" << endl;
+		cout << "Result list:" << endl;
 	auto it = my_times.begin();
-        cout << *it << endl ;
+		cout << *it << endl ;
 	++it;
 	for (; it != my_times.end(); ++it) {
 		cout << *it << endl;
@@ -147,28 +148,125 @@ void printTimes(std::list<Time> my_times){
 }
 
 void printDiff(std::list<Time> my_times){
-        cout << "Result list:" << endl;
+		cout << "Result list:" << endl;
 
 	auto it = my_times.begin();
-        cout << " " << *it << " 00:00" << endl ;
+		cout << " " << *it << " 00:00" << endl ;
 
 	for (; it != my_times.end(); ++it) {
-                cout << " " << *it <<  " " << *it - *it++ << endl ;
+				cout << " " << *it <<  " " << *it - *it++ << endl ;
 		std::advance(it,-1);
-        }
+		}
 }
 
+//==========Part B====================================================
 
+// Interface of double linked list
+// starting point
+template <class T>
+class Tdbl {
+private:
+	// definition of the list node class
+	class Node {
+	public:
+		T _value;	
+		Node *_pNext;	
+		Node *_pPrev;	
+		Node() : _pNext(NULL), _pPrev(NULL){}
+		Node(T val) : _value(val), _pNext(NULL), _pPrev(NULL){}
+		Node(T val, Node* next) : _value(val), _pNext(next), _pPrev(NULL){}
+	};
+
+	Node *first;
+	Node *last;
+
+public:
+
+	Tdbl() {
+		first = NULL;
+		last = NULL;
+	}
+
+	~Tdbl() {
+		Node *aux1, *aux2;
+
+		aux1 = first;
+		while (aux1 != NULL) {
+			aux2 = aux1->_pNext;
+			delete aux1;
+			printf("Deleted\n"); //for testing purposes
+			aux1 = aux2;
+		}
+	}
+
+	Tdbl<T>& insert_to_back(T data) {
+		Node *aux1, *aux2;
+
+		aux1 = first;
+		Node *newnode = new Node(data);
+		if (first == NULL){
+			first = newnode;		//first node
+		}
+		else{
+			while (aux1 -> _pNext != NULL) {
+				aux1 = aux1->_pNext;
+cout << "test "<< endl;
+			}
+			aux1-> _pNext = newnode;
+
+		}			
+			
+//			last->_pNext = newnode;	//not first node
+//		last = newnode;
+
+		return *this;
+	}
+
+	void print(ostream &out) const {
+		Node *what;
+
+		out << "\nList:";
+		what = first;
+		while (what != NULL) {
+			out << " " << what->_value << " ";
+			what = what->_pNext;
+		}
+		out << endl;
+	}
+
+	void print() const {
+		Node *what;
+
+		cout << "\nList:";
+		what = first;
+		while (what != NULL) {
+			cout << " " << what->_value << " ";
+			what = what->_pNext;
+		}
+		cout << endl;
+	}
+
+
+};
+
+
+template <class T>
+ostream &operator<<(ostream &out,  Tdbl<T> const &data) {
+	data.print(out);
+	return out;
+}
 
 
 //Application
 int main () {
 
-    struct termios oldt, newt;
-    tcgetattr(STDIN_FILENO, &oldt); // Save old terminal settings
-    newt = oldt;
-    newt.c_lflag &= ~(ICANON | ECHO); // Turn off canonical mode and echoing
-    tcsetattr(STDIN_FILENO, TCSANOW, &newt); // Apply new settings
+// Part A
+
+	struct termios oldt, newt;
+	tcgetattr(STDIN_FILENO, &oldt); // Save old terminal settings
+	newt = oldt;
+	newt.c_lflag &= ~(ICANON | ECHO); // Turn off canonical mode and echoing
+	tcsetattr(STDIN_FILENO, TCSANOW, &newt); // Apply new settings
 
 
 
@@ -215,7 +313,34 @@ int main () {
 
 
 
-    tcsetattr(STDIN_FILENO, TCSANOW, &oldt); // Restore old terminal settings
+	tcsetattr(STDIN_FILENO, TCSANOW, &oldt); // Restore old terminal settings
+
+// Part B
+	Tdbl<int> dbl;
+
+	dbl.print();
+//	dbl.print_reverse();
+	dbl.insert_to_back(10);
+	dbl.print();
+//	dbl.print_reverse();
+//	dbl.insert_to_front(20);
+	dbl.print();
+//	dbl.print_reverse();
+	dbl.insert_to_back(30);
+	dbl.print();
+//	dbl.print_reverse();
+//	dbl.insert_to_front(40);
+	dbl.print();
+//	dbl.print_reverse();
+	dbl.insert_to_back(50);
+	dbl.print();
+//	dbl.print_reverse();
+
 
 	 return 0;
 }
+
+
+// Implementation of list
+
+
