@@ -111,7 +111,7 @@ class Time {
 	friend istream& operator>>(istream& is, const Time& my_time);
 };
 
-ostream& operator<<(std::ostream& os, const Time& my_time) {
+ostream& operator<<(ostream& os, const Time& my_time) {
 	if (my_time.get_hour() < 10) os << "0" << abs(my_time.get_hour());
 	else os << abs(my_time.get_hour());
 	os << ":";
@@ -200,7 +200,7 @@ int main () {
 
 
 	for (it = inputVec.begin(); it != inputVec.end(); ++it) {
-		std::cout << *it << " ";
+		cout << *it << " ";
 	}
 
 	cout << endl;
@@ -213,10 +213,6 @@ int main () {
 	cout << "Time difference" << endl;
 	printDiff(list);
 
-
-	 //Print the contents of the list
-//	 for (i = 1; i <= list.size(); i++) cout << "\n " << i << "th item was " << list[i];
-//	cout << endl;
 
 
     tcsetattr(STDIN_FILENO, TCSANOW, &oldt); // Restore old terminal settings
