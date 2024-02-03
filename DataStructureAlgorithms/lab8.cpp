@@ -204,21 +204,12 @@ public:
 
 		aux1 = first;
 		Node *newnode = new Node(data);
-		if (first == NULL){
-			first = newnode;		//first node
-		}
-		else{
-			while (aux1 -> _pNext != NULL) {
-				aux1 = aux1->_pNext;
-cout << "test "<< endl;
-			}
-			aux1-> _pNext = newnode;
 
-		}			
+		if (first == NULL) first = newnode; //first node
+		else last->_pNext = newnode; //not first node
+
+		last = newnode;
 			
-//			last->_pNext = newnode;	//not first node
-//		last = newnode;
-
 		return *this;
 	}
 
