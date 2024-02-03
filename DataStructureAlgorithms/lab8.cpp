@@ -206,7 +206,7 @@ public:
 		Node *newnode = new Node(data);
 
 		if (first == NULL) first = newnode; //first node
-		else { last->_pNext = newnode; newnode -> _pPrev = last;} //not first node
+		else { last -> _pNext = newnode; newnode -> _pPrev = last;} //not first node
 
 		last = newnode;
 			
@@ -219,10 +219,13 @@ public:
 		aux1 = first;
 		Node *newnode = new Node(data);
 
-		if (first == NULL) first = newnode; //first node
-		else{ last->_pNext = newnode; newnode -> _pPrev = last;} //not first node
+		if (first == NULL) first = newnode;
+		else{
+			first = newnode;
+			aux1 -> _pPrev = first;
+			newnode->_pNext = aux1;
+		} 
 
-		last = newnode;
 			
 		return *this;
 	}
@@ -247,6 +250,18 @@ public:
 		while (what != NULL) {
 			cout << " " << what->_value << " ";
 			what = what->_pNext;
+		}
+		cout << endl;
+	}
+
+	void print_reverse() const {
+		Node *what;
+
+		cout << "\nList:";
+		what = last;
+		while (what != NULL) {
+			cout << " " << what->_value << " ";
+			what = what->_pPrev;
 		}
 		cout << endl;
 	}
@@ -324,22 +339,22 @@ int main () {
 	Tdbl<int> dbl;
 
 	dbl.print();
-//	dbl.print_reverse();
+	dbl.print_reverse();
 	dbl.insert_to_back(10);
 	dbl.print();
-//	dbl.print_reverse();
-//	dbl.insert_to_front(20);
+	dbl.print_reverse();
+	dbl.insert_to_front(20);
 	dbl.print();
-//	dbl.print_reverse();
+	dbl.print_reverse();
 	dbl.insert_to_back(30);
 	dbl.print();
-//	dbl.print_reverse();
-//	dbl.insert_to_front(40);
+	dbl.print_reverse();
+	dbl.insert_to_front(40);
 	dbl.print();
-//	dbl.print_reverse();
+	dbl.print_reverse();
 	dbl.insert_to_back(50);
 	dbl.print();
-//	dbl.print_reverse();
+	dbl.print_reverse();
 
 
 	 return 0;
