@@ -80,7 +80,6 @@ int main() {
 	while(true){
 		getline(cin, input);
 		b =  getConcatenatedAndLastElement(split_num(input));
-		cout << b[0] <<  " " << b[1] << endl;
 		if(b[0] == "add") bst.insert({trimEnd(b[1]), stoi(b[2])});
 		else if(b[0] == "list") print(bst); 
 		else if(b[0] == "delete") handleDelete(bst, b[1]); 
