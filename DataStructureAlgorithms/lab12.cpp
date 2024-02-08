@@ -11,7 +11,7 @@ typedef complex<double> cx;
 // radix-2 in-place FFT, n must be 2^k (e.g. 2,4,6,...)
 void fft(int n, cx x[]) {
 	const cx J(0, 1);
-	const double PI = 3.14159265359;
+	const double PI = 3.14159265358979324;
 	// check the trivial case
 	if (n == 1)
 		return;
@@ -37,21 +37,55 @@ void fft(int n, cx x[]) {
 	delete[] xo;
 }
 
-double get_average(vector<double> my_vec){
-	double accum = 0;
-	double count = 0;
-	for(auto v: my_vec){
-		accum += v;
-		count += 1;
+// Measure class responsible for measuring execution times
+class Measure {
+public:
+	vector <double> avvec;
+
+	Measure(int n, cx* x) : N(n), input(new cx[N]) {
+		for (int i = 0; i < N; ++i) {
+			input[i] = x[i]; 
+		}
+	}
+		
+//	void measure(TestFunction& func, double &mean, double &stdev, int iterations = 30) {
+	void measurefft(double &mean, double &stdev, int iterations = 30) {
+
+		for (int a = 0; a < 30; a++){ 
+			auto start = chrono::high_resolution_clock::now();
+
+			fft(N, input);
+
+			auto stop = chrono::high_resolution_clock::now();
+			auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
+			double duration_double = static_cast<double>(duration.count());
+			avvec.push_back(duration_double);
+		}
+
+		double total = accumulate(avvec.rbegin(), avvec.rend(), 0.0, [](double accum, double val){ return accum + val; });
+		mean = total/avvec.size();
+
+		double total2 = accumulate(avvec.rbegin(), avvec.rend(), 0.0, [mean](double accum, double val){
+
+			return accum + (val - mean)*(val - mean);
+
+
+		 });
+
+		stdev =  sqrt(total2/(avvec.size()));
+
 	}
 
-	return  accum / count;
-}
+private:
+	int N;
+	cx* input;
+
+};
+
+
 
 
 int main() {
-
-	vector<double> average_me;
 
 	int N = 8;
 	for (int n = 0; n < 15; n++){ // segfault over 15, but why?
@@ -62,30 +96,17 @@ int main() {
 	for (int i = 0; i < N; i++)
 		input[i] = complex<double>(i, -i);  // linear ramp for real part, negative ramp for imaginary part
 
+
+
 	vector <double> avvec;
-	for (int a = 0; a < 5; a++){ // measuring 100 times for statistics.
-		auto start = chrono::high_resolution_clock::now();
+	double ave;
 
-		fft(N, input);
+ 	double stddiv;
 
-		auto stop = chrono::high_resolution_clock::now();
-		auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
-		double duration_double = static_cast<double>(duration.count());
-		avvec.push_back(duration_double);
-	}
-
-	double total = accumulate(avvec.rbegin(), avvec.rend(), 0.0, [](double accum, double val){ return accum + val; });
-	double ave = total/avvec.size();
-
-	double total2 = accumulate(avvec.rbegin(), avvec.rend(), 0.0, [ave](double accum, double val){
-
-		return accum + (val - ave)*(val - ave);
-
-
-	 });
-
+	Measure m(N, input);
+	m.measurefft(ave, stddiv);
 	cout << "Time taken by fft at N=" << N << " Average microseconds: "
-		  << (int) ave << "±" <<  (int) sqrt(total2/(avvec.size())) * 3 << "ms" << endl;
+		  << (int) ave << "±" <<  (int) stddiv << "ms" << endl;
 
 
 	// display the results
