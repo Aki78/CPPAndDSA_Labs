@@ -49,18 +49,6 @@ double get_average(vector<double> my_vec){
 }
 
 
-double get_standdiv(vector<double> my_vec, double size, double ave){
-	double accum = 0;
-	double count = 0;
-	for(auto v: my_vec){
-		accum += (v - ave)*(v - ave);
-	}
-
-	return  sqrt(accum / size);
-}
-
-
-
 int main() {
 
 	vector<double> average_me;
@@ -75,7 +63,7 @@ int main() {
 		input[i] = complex<double>(i, -i);  // linear ramp for real part, negative ramp for imaginary part
 
 	vector <double> avvec;
-	for (int a = 0; a < 30; a++){ // measuring 30 times for statistics.
+	for (int a = 0; a < 5; a++){ // measuring 100 times for statistics.
 		auto start = chrono::high_resolution_clock::now();
 
 		fft(N, input);
@@ -85,9 +73,19 @@ int main() {
 		double duration_double = static_cast<double>(duration.count());
 		avvec.push_back(duration_double);
 	}
-	double ave_val = get_average(avvec);
+
+	double total = accumulate(avvec.rbegin(), avvec.rend(), 0.0, [](double accum, double val){ return accum + val; });
+	double ave = total/avvec.size();
+
+	double total2 = accumulate(avvec.rbegin(), avvec.rend(), 0.0, [ave](double accum, double val){
+
+		return accum + (val - ave)*(val - ave);
+
+
+	 });
+
 	cout << "Time taken by fft at N=" << N << " Average microseconds: "
-		 << (int) ave_val << "±" << (int) get_standdiv(avvec, avvec.size(), ave_val) <<  endl;
+		  << (int) ave << "±" <<  (int) sqrt(total2/(avvec.size())) * 3 << "ms" << endl;
 
 
 	// display the results
