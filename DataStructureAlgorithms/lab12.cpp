@@ -4,6 +4,8 @@
 #include <vector>
 #include <chrono>
 #include <math.h>
+#include <thread>
+#include <algorithm>
 
 using namespace std;
 
@@ -37,7 +39,56 @@ void fft(int n, cx x[]) {
 	delete[] xo;
 }
 
+
+void fftInefficientThreads(int n, cx x[]) {
+	const cx J(0, 1);
+	const double PI = 3.14159265358979324;
+	// check the trivial case
+	if (n == 1)
+		return;
+
+	// perform two sub-transforms
+	int n2 = n/2; // size of sub-transform
+	cx *xe = new cx[n2];
+	cx *xo = new cx[n2];
+	for (int i = 0; i < n2; i++) { // perform n/2 DIF 'butterflies'
+		xe[i] = x[i] + x[i+n2];						 // even subset
+		xo[i] = (x[i] - x[i+n2])*exp(-J*(2*PI*i/n)); // odd subset
+	}
+
+	thread thread_even(fftInefficientThreads,n2, xe);
+	thread  thread_odd(fftInefficientThreads,n2, xo);
+
+	thread_even.join();
+	 thread_odd.join();
+
+	// construct the result vector
+	for (int k = 0; k < n2; k++) {
+		x[2*k]   = xe[k]; // even k
+		x[2*k+1] = xo[k]; // odd k
+	}
+
+	delete[] xe;
+	delete[] xo;
+}
+
+
+//void fftEfficientThreads(complex<double>* data, int n) {
+//
+//
+//}
+
+
 // Measure class responsible for measuring execution times
+
+//class FFTTestBed {
+//public:
+//
+//public:
+//
+//
+//}
+
 class Measure {
 public:
 	vector <double> avvec;
@@ -61,6 +112,8 @@ public:
 			double duration_double = static_cast<double>(duration.count());
 			avvec.push_back(duration_double);
 		}
+		sort(avvec.begin(), avvec.end(), greater<double>());
+		avvec.erase(avvec.begin(), avvec.begin() + 10);
 
 		double total = accumulate(avvec.rbegin(), avvec.rend(), 0.0, [](double accum, double val){ return accum + val; });
 		mean = total/avvec.size();
@@ -88,31 +141,31 @@ private:
 int main() {
 
 	int N = 8;
-	for (int n = 0; n < 15; n++){ // segfault over 15, but why?
-	N *=2;
-	complex<double> input[N];
+	for (int n = 0; n < 7; n++){ // segfault over 15, but why?
+		N *=2;
+		complex<double> input[N];
 
-	// create the test input signal sequence
-	for (int i = 0; i < N; i++)
-		input[i] = complex<double>(i, -i);  // linear ramp for real part, negative ramp for imaginary part
-
-
-
-	vector <double> avvec;
-	double ave;
-
- 	double stddiv;
-
-	Measure m(N, input);
-	m.measurefft(ave, stddiv);
-	cout << "Time taken by fft at N=" << N << " Average microseconds: "
-		  << (int) ave << "±" <<  (int) stddiv << "ms" << endl;
+		// create the test input signal sequence
+		for (int i = 0; i < N; i++)
+			input[i] = complex<double>(i, -i);  // linear ramp for real part, negative ramp for imaginary part
 
 
-	// display the results
-//	for (const auto& c: input)
-//		cout << c << endl;
+
+		vector <double> avvec;
+		double ave;
+
+		double stddiv;
+
+		Measure m(N, input);
+		m.measurefft(ave, stddiv, 10000);
+		cout << "Time taken by fft at N=" << N << " Average microseconds: "
+			  << (int) ave << "±" <<  (int) stddiv << "micros" << endl;
+
+
 
 	}
+
+	int num_threads = thread::hardware_concurrency(); // Get number of cores
+cout << num_threads<< endl;
 	return EXIT_SUCCESS;
 }
