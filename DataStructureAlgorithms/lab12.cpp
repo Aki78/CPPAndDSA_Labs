@@ -6,8 +6,11 @@
 #include <math.h>
 #include <thread>
 #include <algorithm>
+#include <future>
 
 using namespace std;
+
+int MAX_DEPTH = 4;
 
 typedef complex<double> cx;
 // radix-2 in-place FFT, n must be 2^k (e.g. 2,4,6,...)
@@ -39,7 +42,7 @@ void fft(int n, cx x[]) {
 	delete[] xo;
 }
 
-
+// Attempt 1, making htreads for every split
 void fftInefficientThreads(int n, cx x[]) {
 	const cx J(0, 1);
 	const double PI = 3.14159265358979324;
@@ -72,11 +75,44 @@ void fftInefficientThreads(int n, cx x[]) {
 	delete[] xo;
 }
 
+// Attempt 2 - limiting depth
+void fftEfficient1( int n,  cx x[], int depth = 0) {
 
-//void fftEfficientThreads(complex<double>* data, int n) {
-//
-//
-//}
+	const cx J(0, 1);
+	const double PI = 3.14159265358979324;
+	// check the trivial case
+	if (n == 1)
+		return;
+
+	// perform two sub-transforms
+	int n2 = n/2; // size of sub-transform
+	cx *xe = new cx[n2];
+	cx *xo = new cx[n2];
+	for (int i = 0; i < n2; i++) { // perform n/2 DIF 'butterflies'
+		xe[i] = x[i] + x[i+n2];						 // even subset
+		xo[i] = (x[i] - x[i+n2])*exp(-J*(2*PI*i/n)); // odd subset
+	}
+	if (depth < MAX_DEPTH){
+		thread thread_even( fftEfficient1,n2, xe, depth + 1);
+		thread  thread_odd( fftEfficient1,n2, xo, depth + 1);
+
+		thread_even.join();
+		 thread_odd.join();
+	} else {
+		 fftEfficient1(n2, xe, depth + 1);
+		 fftEfficient1(n2, xo, depth + 1);
+	}
+
+	// construct the result vector
+	for (int k = 0; k < n2; k++) {
+		x[2*k]   = xe[k]; // even k
+		x[2*k+1] = xo[k]; // odd k
+	}
+
+	delete[] xe;
+	delete[] xo;
+
+}
 
 
 // Measure class responsible for measuring execution times
@@ -105,7 +141,7 @@ public:
 		for (int a = 0; a < 30; a++){ 
 			auto start = chrono::high_resolution_clock::now();
 
-			fft(N, input);
+			fftInefficientThreads(N, input);
 
 			auto stop = chrono::high_resolution_clock::now();
 			auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
@@ -141,7 +177,7 @@ private:
 int main() {
 
 	int N = 8;
-	for (int n = 0; n < 7; n++){ // segfault over 15, but why?
+	for (int n = 0; n < 15; n++){ // segfault over 15, but why?
 		N *=2;
 		complex<double> input[N];
 
