@@ -115,15 +115,38 @@ void fftEfficient1( int n,  cx x[], int depth = 0) {
 }
 
 
-// Measure class responsible for measuring execution times
+// Attempt 3 - using Async instead of thread (Broken, doesn't work)
+void fftEfficient2( int n,  cx x[]) {
 
-//class FFTTestBed {
-//public:
-//
-//public:
-//
-//
-//}
+	const cx J(0, 1);
+	const double PI = 3.14159265358979324;
+	// check the trivial case
+	if (n == 1)
+		return;
+
+	// perform two sub-transforms
+	int n2 = n/2; // size of sub-transform
+	cx *xe = new cx[n2];
+	cx *xo = new cx[n2];
+	for (int i = 0; i < n2; i++) { // perform n/2 DIF 'butterflies'
+		xe[i] = x[i] + x[i+n2];						 // even subset
+		xo[i] = (x[i] - x[i+n2])*exp(-J*(2*PI*i/n)); // odd subset
+	}
+		auto handle_even = async( launch::async, fftEfficient2,n2, xe);
+		auto handle_odd = async( launch::async,  fftEfficient2,n2, xo);
+
+
+	// construct the result vector
+	for (int k = 0; k < n2; k++) {
+		x[2*k]   = xe[k]; // even k
+		x[2*k+1] = xo[k]; // odd k
+	}
+
+	delete[] xe;
+	delete[] xo;
+
+}
+
 
 class Measure {
 public:
@@ -135,13 +158,15 @@ public:
 		}
 	}
 		
-//	void measure(TestFunction& func, double &mean, double &stdev, int iterations = 30) {
 	void measurefft(double &mean, double &stdev, int iterations = 30) {
 
 		for (int a = 0; a < 30; a++){ 
 			auto start = chrono::high_resolution_clock::now();
 
-			fftInefficientThreads(N, input);
+//			fft(N, input); // Change here to test the different fft's implementation;
+			fftEfficient1(N, input); // Change here to test the different fft's implementation;
+//			fftInefficientThreads(N, input); // Change here to test the different fft's implementation;
+//			fftEfficient2(N, input); // Change here to test the different fft's implementation;
 
 			auto stop = chrono::high_resolution_clock::now();
 			auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
@@ -201,7 +226,5 @@ int main() {
 
 	}
 
-	int num_threads = thread::hardware_concurrency(); // Get number of cores
-cout << num_threads<< endl;
 	return EXIT_SUCCESS;
 }
