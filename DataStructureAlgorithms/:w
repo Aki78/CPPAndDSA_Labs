@@ -79,9 +79,9 @@ void greedy( vector<int>& final_val_vec,vector<int>& final_weight_vec,vector<int
 		i++;
 		currentWeight = accum_me(final_weight_vec); 
 	}
-	final_ind_vec.pop_back(); // Removing the last value, cuz it is over the limit
-	final_val_vec.pop_back(); // Removing the last value, cuz it is over the limit
-	final_weight_vec.pop_back(); // Removing the last value, cuz it is over the limit
+	//final_ind_vec.pop_back(); // Removing the last value, cuz it is over the limit
+	//final_val_vec.pop_back(); // Removing the last value, cuz it is over the limit
+	//final_weight_vec.pop_back(); // Removing the last value, cuz it is over the limit
 
 
 }
@@ -156,6 +156,13 @@ int main() {
 //=== PART B ================
 	sort(ind_vec.begin(), ind_vec.end(), [&val_vec](int a, int b) { return val_vec[a] > val_vec[b]; }); // sorting indices (product number) based on values;
 
+//	auto rearrange = [](const auto& src, vector<int> arr_vec) {
+//		vector<int> temp(src.size());
+//		for (size_t i = 0; i < arr_vec.size(); ++i) 
+//			temp[i] = src[arr_vec[i]];
+//		return temp;
+//	};
+
 
 	vector<int> val_vec_arranged = rearrange(val_vec, ind_vec);
 	vector<int> weight_vec_arranged = rearrange(weight_vec, ind_vec);
@@ -163,9 +170,9 @@ int main() {
 	cout << val_vec_arranged[0] << endl;
 
 
-//	for (int i = 0; i < ind_vec.size(); ++i) {
-//		cout << ind_vec[i] << " " << val_vec_arranged[i] << " " << weight_vec_arranged[i] << endl;
-//	}
+	for (int i = 0; i < ind_vec.size(); ++i) {
+		cout << ind_vec[i] << " " << val_vec_arranged[i] << " " << weight_vec_arranged[i] << endl;
+	}
 
 	vector<int> final_val_vec;
 	vector<int> final_weight_vec;
@@ -177,18 +184,55 @@ int main() {
 
 	cout << "size of the final vector: " << final_ind_vec.size() << endl;
 
-	new_ind_vec = final_ind_vec; // copying the product number vector
+	new_ind_vec = final_ind_vec;	
 
-	sort(final_ind_vec.begin(), final_ind_vec.end(), [&new_ind_vec](int a, int b) { return new_ind_vec[a] < new_ind_vec[b]; }); // Why does this sort break the order!?!?!?
-	sort(final_weight_vec.begin(), final_weight_vec.end(), [new_ind_vec](int a, int b) { return new_ind_vec[a] < new_ind_vec[b];});
-	sort(final_val_vec.begin(), final_val_vec.end(), [new_ind_vec](int a, int b) { return new_ind_vec[a] < new_ind_vec[b]; }); 
 
-// completely randomly sorted, sort is just randomizing the order!?!?!?
+	sort(ind_vec.begin(), ind_vec.end(), [&val_vec](int a, int b) { return final_ind_vec[a] > final_ind_vec[b]; }); // sorting indices (product number) based on values;
+	sort(ind_vec.begin(), ind_vec.end(), [&val_vec](int a, int b) { return final_ind_vec[a] > final_ind_vec[b]; }); // sorting indices (product number) based on values;
+	sort(ind_vec.begin(), ind_vec.end(), [&val_vec](int a, int b) { return final_ind_vec[a] > final_ind_vec[b]; }); // sorting indices (product number) based on values;
+
+//	sort(final_ind_vec.begin(), final_ind_vec.end(), final_val_vec.begin(), 0);
+
+//	final_ind_vec = reorderBasedOnAnother(new_ind_vec, final_ind_vec); 
+//	final_val_vec = reorderBasedOnAnother(new_ind_vec, final_val_vec); 
+//	final_weight_vec = reorderBasedOnAnother(new_ind_vec, final_weight_vec); 
+
+//	vector<int> indices(new_ind_vec.size());
+//	iota(indices.begin(), indices.end(), 0); // Fill with 0, 1, ..., b.size() - 1
+//
+//	sort(indices.begin(), indices.end(), [&new_ind_vec](int i1, int i2) {
+//		return new_ind_vec[i1] < new_ind_vec[i2];
+//	});
+//
+//
+//	vector<int> final_final_val_vec;
+//	vector<int> final_final_weight_vec;
+//	vector<int> final_final_ind_vec;
+
+//	for (size_t i = 0; i < indices.size(); ++i) {
+//		final_final_val_vec[i] = final_val_vec[indices[i]];
+//	}
+//	for (size_t i = 0; i < indices.size(); ++i) {
+//		final_final_weight_vec[i] = final_weight_vec[indices[i]];
+//	}
+//	for (size_t i = 0; i < indices.size(); ++i) {
+//		final_final_ind_vec[i] = final_ind_vec[indices[i]];
+//	}
+
 cout << "Final values are: " << endl;
 	for (int i = 0; i < final_ind_vec.size(); ++i) {
 		cout << final_ind_vec[i] << " " << final_val_vec[i] << " " << final_weight_vec[i] << endl;
 	}
 
+
+//cout << "Initial state:" << endl;
+//bitArray.print();
+//++bitArray;
+//cout << "After increment:" << endl;
+//bitArray.print();
+//++bitArray;
+//cout << "After another increment:" << endl;
+//bitArray.print();
 
 	return 0;
 }
