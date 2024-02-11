@@ -19,7 +19,7 @@ public:
 	}
 
 private:
-	vector<int> the_numbers;
+	vector<int> the_numbers; // its used for mirroring the actual vector
 
 
 
